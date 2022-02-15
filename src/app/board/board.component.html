@@ -1,3 +1,10 @@
-<button (click)="createBoard()"> Reset </button>
+<button (click)="reset()"> Reset </button>
 
-<div id="board"></div>
+<div id="board">
+    <div *ngFor="let val of squares; let i=index">
+        <div *ngIf="datas[i]==1" class="blackGround tile" (click)="clickTile(i)">
+        </div>
+        <div *ngIf="datas[i]==0" class="tree tile">
+        </div>
+    </div>
+</div>

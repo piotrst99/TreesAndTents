@@ -1,11 +1,68 @@
 .tiles{
-    background-color: rosybrown;
+    background-color: rgb(32, 29, 29);
     width: 50px;
     height: 50px;
     margin: 2px;
     font-size: 20px;
+    color: white;
+}
+
+.tiles:hover{
+    cursor: pointer;
+    background-color: rgb(61, 61, 61);
 }
 
 #board{
-    margin: auto;
+    grid-gap: 0px;
+    display: grid;
+    grid-template-columns: repeat(5,52px);
+    grid-template-rows: repeat(5,52px);
+}
+
+.e{
+    background-color: aqua;
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+}
+
+#t{
+    display: grid;
+    grid-template-columns: repeat(5,52px);
+    grid-template-rows: repeat(5,52px);
+    grid-gap: 0px;
+}
+
+.blackGround{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(32, 29, 29);
+}
+
+.blackGround:hover{
+    cursor: pointer;
+    background-color: rgb(61, 61, 61);
+}
+
+.tree{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: green;
+}
+
+.grass{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(56, 201, 56);
+}
+
+.grass:hover{
+    cursor: pointer;
+    background-color: rgb(150, 219, 150);
 }
