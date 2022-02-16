@@ -51,7 +51,7 @@
     height: 50px;
     margin: 2px;
     font-size: 20px;
-    background-color: green;
+    background-color: rgb(7, 70, 7);
 }
 
 .grass{
@@ -65,4 +65,35 @@
 .grass:hover{
     cursor: pointer;
     background-color: rgb(150, 219, 150);
+}
+
+.tent{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(114, 8, 8);
+}
+
+.tent:hover{
+    cursor: pointer;
+    background-color: rgb(158, 54, 54);
+}
+
+#top{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    grid-gap: 0px;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#left{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    grid-gap: 0px;
+    text-align: center;
 }

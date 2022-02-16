@@ -1,10 +1,38 @@
 <button (click)="reset()"> Reset </button>
+<button (click)="back()"> Back </button>
+<button (click)="check()"> Check </button>
 
-<div id="board">
-    <div *ngFor="let val of squares; let i=index">
-        <div *ngIf="datas[i]==1" class="blackGround tile" (click)="clickTile(i)">
-        </div>
+<br /><br /><br />
+
+<div style="margin-left: 50px;">
+    <div id="top" *ngFor="let val of topCountofTents; let i=index">
+        <div>{{topCountofTents[i]}}</div>
+    </div>
+</div>
+
+<div style="clear: both;"></div>
+
+<div style="float: left;">
+    <div id="left" *ngFor="let val of leftCountofTents; let i=index" >
+        <div>{{leftCountofTents[i]}}</div>
+    </div>
+</div>
+
+<div id="board" style="float: left;">
+    <div *ngFor="let val of datas; let i=index">
         <div *ngIf="datas[i]==0" class="tree tile">
         </div>
+        <div *ngIf="datas[i]==1" class="blackGround tile" (click)="clickTile(i)">
+        </div>
+        <div *ngIf="datas[i]==2" class="grass tile" (click)="clickTile(i)">
+        </div>
+        <div *ngIf="datas[i]==3" class="tent tile" (click)="clickTile(i)">
+        </div>
     </div>
+</div>
+
+<div style="clear: both;"></div>
+
+<div *ngIf="levelIsEnd">
+    <p>Level is completed</p>
 </div>

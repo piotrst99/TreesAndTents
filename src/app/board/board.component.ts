@@ -12,13 +12,25 @@ export class BoardComponent {
   private sideSize = 5;
   private matrizSize = this.sideSize * this.sideSize;
   public squares: any[] = [];
-  public datas: number[] = [1, 1, 1, 1, 1,
-                          1, 0, 1, 0, 1,
-                          1, 1, 1, 1, 1,
-                          0, 0, 1, 1, 1,
-                          1, 1, 1, 1, 0];
 
-  levelIsEnd = false;
+  public topCountofTents: number[] = [2, 0, 1, 1, 1];
+  public leftCountofTents: number[] = [1, 1, 0, 2, 1];
+
+  public items: number[] = [1, 1, 1, 1, 1,
+    1, 0, 1, 0, 1,
+    1, 1, 1, 1, 1,
+    0, 0, 1, 1, 1,
+    1, 1, 1, 1, 0];
+
+  public correctLvl: number[] = [1, 1, 1, 3, 1,
+    3, 0, 1, 0, 1,
+    1, 1, 1, 1, 1,
+    0, 0, 3, 1, 3,
+    3, 1, 1, 1, 0];
+
+  public datas: number[] = [];
+
+  public levelIsEnd = false;
 
   constructor() { }
 
@@ -31,8 +43,19 @@ export class BoardComponent {
   }
 
   newGame() {
-    this.createBoard();
-    this.squares = Array(this.matrizSize).fill(null);
+    //this.datas = this.items;
+
+    this.levelIsEnd = false;
+
+    this.datas = [];
+
+    this.items.forEach((element, index, items) => {
+      this.datas.push(items[index]);
+      //this.datas.push(element);
+    });
+
+    //this.createBoard();
+    //this.squares = Array(this.matrizSize).fill(null);
   }
 
   createBoard(): void {
@@ -62,30 +85,49 @@ export class BoardComponent {
       }
       document.getElementById('board')?.appendChild(divRow);
     }*/
-
   }
 
   clickTile(val: number): void {
-    //console.log(val);
-    console.log(document.getElementsByClassName('tile')[val]);
-    if(this.datas[val]!=3){
-      this.datas[val]+=1;
-      if(this.datas[val] == 2){
-        let div = document.getElementsByClassName('tile')[val];
-        div.className = 'grass tile';
-        console.log(div);
-        console.log(val);
-        console.log(this.datas[val]);
-        //document.getElementsByClassName('tile')[val].classList.remove('blackGround');
-        //document.getElementsByClassName('tile')[val].classList.add('grass');
-      }
+    if (this.datas[val] != 3) {
+      this.datas[val] += 1;
     }
-    else{
+    else {
       this.datas[val] = 1;
-      document.getElementsByClassName('tile')[val].classList.remove();
-      document.getElementsByClassName('tile')[val].classList.add('blackGround');
     }
   }
 
+  check(): void {
+
+    let countOfPutTents = 0;
+    this.datas.forEach((element, index, items) => {
+      if(element == 3)
+        countOfPutTents++;
+    });
+
+    if(countOfPutTents == 5){
+      let isCorrect = 0;
+  
+      this.correctLvl.forEach((element, index, items) => {
+        if (this.datas[index] != this.correctLvl[index]) {
+          //alert('Incorrect');
+        }
+        else {
+          isCorrect++;
+        }
+      });
+  
+      isCorrect == this.datas.length ? this.levelIsEnd = true : false;
+      
+      return;
+
+    }
+
+    this.levelIsEnd = false;
+
+  }
+
+  back(): void {
+
+  }
 
 }
