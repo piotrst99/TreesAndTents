@@ -88,46 +88,55 @@ export class BoardComponent {
   }
 
   clickTile(val: number): void {
-    if (this.datas[val] != 3) {
-      this.datas[val] += 1;
-    }
-    else {
-      this.datas[val] = 1;
+    if(!this.levelIsEnd){
+      if (this.datas[val] !== 3) {
+        this.datas[val] += 1;
+      }
+      else {
+        this.datas[val] = 1;
+      }
+  
+      this.check();
     }
   }
 
   check(): void {
 
+    if(this.checkCountOfTents() === 5){
+      let isCorrect = 0;
+  
+      this.correctLvl.forEach((element, index, items) => {
+        /*if (this.datas[index] != this.correctLvl[index]) {
+          //alert('Incorrect');
+        }
+        else {
+          isCorrect++;
+        }*/
+
+        if(element === 3){
+          if(this.datas[index] === this.correctLvl[index]){
+            isCorrect++;
+          }
+        }
+
+      });
+  
+      isCorrect === 5 /*this.datas.length*/ ? this.levelIsEnd = true : false;
+      
+      return;
+    }
+
+  }
+
+  private checkCountOfTents(): number{
     let countOfPutTents = 0;
     this.datas.forEach((element, index, items) => {
       if(element == 3)
         countOfPutTents++;
     });
 
-    if(countOfPutTents == 5){
-      let isCorrect = 0;
-  
-      this.correctLvl.forEach((element, index, items) => {
-        if (this.datas[index] != this.correctLvl[index]) {
-          //alert('Incorrect');
-        }
-        else {
-          isCorrect++;
-        }
-      });
-  
-      isCorrect == this.datas.length ? this.levelIsEnd = true : false;
-      
-      return;
-
-    }
-
-    this.levelIsEnd = false;
-
+    return countOfPutTents;
   }
-
-  back(): void {
-
-  }
+  
 
 }
