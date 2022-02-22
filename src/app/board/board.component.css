@@ -1,0 +1,105 @@
+#gameArea{
+    margin: 30px auto 30px auto;
+    width: 60%;
+}
+
+#board{
+    grid-gap: 0px;
+    display: grid;
+    grid-template-columns: repeat(5,52px);
+    grid-template-rows: repeat(5,52px);
+}
+
+.blackGround{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(32, 29, 29);
+}
+
+.blackGround:hover{
+    cursor: pointer;
+    background-color: rgb(61, 61, 61);
+}
+
+.tree{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(7, 70, 7);
+}
+
+.grass{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(56, 201, 56);
+}
+
+.grass:hover{
+    cursor: pointer;
+    background-color: rgb(150, 219, 150);
+}
+
+.tent{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(114, 8, 8);
+}
+
+.tent:hover{
+    cursor: pointer;
+    background-color: rgb(158, 54, 54);
+}
+
+#top{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    grid-gap: 0px;
+    float: left;
+    text-align: center;
+}
+
+#left{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    grid-gap: 0px;
+    text-align: center;
+}
+
+
+
+/*.tiles{
+    background-color: rgb(32, 29, 29);
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    color: white;
+}
+
+.tiles:hover{
+    cursor: pointer;
+    background-color: rgb(61, 61, 61);
+}*/
+
+/*.e{
+    background-color: aqua;
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+}
+
+#t{
+    display: grid;
+    grid-template-columns: repeat(5,52px);
+    grid-template-rows: repeat(5,52px);
+    grid-gap: 0px;
+}*/

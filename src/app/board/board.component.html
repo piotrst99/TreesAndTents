@@ -1,0 +1,60 @@
+<button (click)="reset()" class="btn btn-primary"> Reset </button>
+<!--<button (click)="check()"> Check </button>-->
+
+<div id="gameArea">
+    <div style="margin-left: 50px;">
+        <div id="top" *ngFor="let val of topCountofTents; let i=index">
+            <div>{{topCountofTents[i]}}</div>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div style="float: left;">
+        <div id="left" *ngFor="let val of leftCountofTents; let i=index">
+            <div>{{leftCountofTents[i]}}</div>
+        </div>
+    </div>
+
+    <div id="board" style="float: left;">
+        <div *ngFor="let val of datas; let i=index">
+            <div *ngIf="datas[i]==0" class="tree tile">
+            </div>
+            <div *ngIf="datas[i]==1" class="blackGround tile" (click)="clickTile(i)">
+            </div>
+            <div *ngIf="datas[i]==2" class="grass tile" (click)="clickTile(i)">
+            </div>
+            <div *ngIf="datas[i]==3" class="tent tile" (click)="clickTile(i)">
+            </div>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div *ngIf="levelIsEnd">
+        <p>Level is completed</p>
+    </div>
+
+</div>
+
+<div id="signs" class="col sm-6">
+    <div id="treeSign" class="row">
+        <div class="tree"></div>
+        <p style="margin-left: 20px;">Tree</p>
+    </div>
+
+    <div id="groundSign" class="row">
+        <div class="blackGround"></div>
+        <p style="margin-left: 20px;">Ground</p>
+    </div>
+
+    <div id="grassSign" class="row">
+        <div class="grass"></div>
+        <p style="margin-left: 20px;">Grass</p>
+    </div>
+
+    <div id="tentSign" class="row">
+        <div class="tent" ></div>
+        <p style="margin-left: 20px;">Tent</p>
+    </div>
+</div>
