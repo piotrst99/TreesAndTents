@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
+import { SignsComponent } from '../signs/signs.component';
 
 @Component({
   selector: 'app-board',
