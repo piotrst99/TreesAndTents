@@ -1,6 +1,10 @@
 #gameArea{
     margin: 30px auto 30px auto;
-    width: 60%;
+    width: 80%;
+}
+
+#signs{
+    margin: 30px auto 30px auto;
 }
 
 #board{
@@ -8,6 +12,11 @@
     display: grid;
     grid-template-columns: repeat(5,52px);
     grid-template-rows: repeat(5,52px);
+}
+
+#all{
+    width: 60%;
+    margin: auto;
 }
 
 .blackGround{

@@ -2,6 +2,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
 import { SignsComponent } from '../signs/signs.component';
 
+//declare const showFinal: Function;
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -98,11 +100,11 @@ export class BoardComponent {
         this.datas[val] = 1;
       }
   
-      this.check();
+      this.check_LevelIsEnd();
     }
   }
 
-  check(): void {
+  check_LevelIsEnd(): void {
 
     if(this.checkCountOfTents() === 5){
       let isCorrect = 0;
@@ -139,6 +141,10 @@ export class BoardComponent {
 
     return countOfPutTents;
   }
+
   
+  /*public callFinalDialog(): void{
+    showFinal();
+  }*/
 
 }
