@@ -1,3 +1,7 @@
+# Game description
+
+Trees and Tents is a challenging logic puzzle. Place a tent next to every tree on the grid, but make sure that the tents do not touch.
+
 # TreesAndTents
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
