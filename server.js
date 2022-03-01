@@ -6,9 +6,13 @@ const app = express();
 
 // Serve only the static files form the dist directory
 app.use(express.static('./dist/trees-and-tents'));
+//app.use(express.static('../TreesAndTents'));
+//app.use(express.static('../TreesAndTents'));
 
 app.get('/*', (req, res) =>
     res.sendFile('index.html', {root: 'dist/trees-and-tents/'}),
+    //res.sendFile('index.html', {root: '../TreesAndTents/src/'}),
+    //res.sendFile('index.html', '../TreesAndTents/src/'),
 );
 
 // Start the app by listening on the default Heroku port
