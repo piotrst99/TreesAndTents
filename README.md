@@ -1,6 +1,7 @@
 # Game description
 
 Trees and Tents is a challenging logic puzzle. Place a tent next to every tree on the grid, but make sure that the tents do not touch.
+
 WARNING! The app is under construction.
 
 # TreesAndTents
