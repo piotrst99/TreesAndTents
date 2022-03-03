@@ -1,6 +1,8 @@
 #title{
-    text-align: center;
+    /*text-align: center;*/
     font-size: 50px;
     margin-top: 40px;
     font-weight: bold;
+    letter-spacing: 5px;
+    color: rgb(223, 223, 223);
 }

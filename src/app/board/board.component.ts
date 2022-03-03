@@ -1,6 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
-import { SignsComponent } from '../signs/signs.component';
+import { Board } from '../models/board';
+//import data from '../../assets/map_5x5/level1_5x5.json';
+
+//import * as data from '../../assets/map_5x5/level1_5x5.json';
+import * as data from '../../assets/map_6x6/level1_6x6.json';
+
+//import { json } from 'express';
 
 //declare const showFinal: Function;
 
@@ -17,8 +23,10 @@ export class BoardComponent {
   private matrizSize = this.sideSize * this.sideSize;
   public squares: any[] = [];
 
-  public topCountofTents: number[] = [2, 0, 1, 1, 1];
-  public leftCountofTents: number[] = [1, 1, 0, 2, 1];
+  public levelName: string="";
+
+  public topCountofTents: number[] = [];
+  public leftCountofTents: number[] = [];
 
   public items: number[] = [1, 1, 1, 1, 1,
     1, 0, 1, 0, 1,
@@ -32,11 +40,19 @@ export class BoardComponent {
     0, 0, 3, 1, 3,
     3, 1, 1, 1, 0];
 
+  public startLevel: number[][]= [];
+  public correctLevel: number[][]=[];
+    
   public datas: number[] = [];
+  public levelFromJson: any;
 
   public levelIsEnd = false;
 
-  constructor() { }
+
+  constructor() { 
+
+
+  }
 
   ngOnInit(): void {
     this.newGame();
@@ -48,6 +64,27 @@ export class BoardComponent {
 
   newGame() {
     //this.datas = this.items;
+
+    let level: Board =  JSON.parse(JSON.stringify(data));
+    //let level2: Board =  JSON.parse(data);
+    
+    //let level3: Board = json().then(a=> new Board(JSON.parse(data)));
+
+    //console.log(JSON.stringify(data));
+    //console.log(level.startLevel);
+
+    //console.log(level.startLevel);
+
+    this.sideSize = level.startLevel.length;
+    this.sideSize = level.startLevel.length;
+    this.matrizSize = this.sideSize*this.sideSize;
+    this.topCountofTents = level.columnValues;
+    this.leftCountofTents = level.rowValues;
+    this.startLevel = level.startLevel;
+    this.correctLevel = level.correctLevel;
+    this.levelName = level.nameLevel;
+
+    console.log(this.topCountofTents);
 
     this.levelIsEnd = false;
 
