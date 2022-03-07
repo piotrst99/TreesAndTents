@@ -81,11 +81,11 @@
                 <div style="float: left;" *ngFor="let val2 of startLevel[i]; let j=index">
                     <div *ngIf="startLevel[i][j]==0" class="tree tile">
                     </div>
-                    <div *ngIf="startLevel[i][j]==1" class="blackGround tile" (click)="clickTile(i)">
+                    <div *ngIf="startLevel[i][j]==1" class="blackGround tile" (click)="clickTile2(i,j)">
                     </div>
-                    <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile(i)">
+                    <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile2(i,j)">
                     </div>
-                    <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile(i)">
+                    <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile2(i,j)">
                     </div>
                     <!--{{startLevel[i][j]}}-->
                 </div>
