@@ -23,6 +23,7 @@ export class BoardComponent {
 
   public topCountofTents: number[] = [];
   public leftCountofTents: number[] = [];
+  private countOfTentsInLevel: number = 0;
 
   public items: number[] = [];
   /*public items: number[] = [1, 1, 1, 1, 1,
@@ -81,6 +82,8 @@ export class BoardComponent {
       this.datas.push(items[index]);
       //this.datas.push(element);
     });*/
+
+    this.countOfTentsInLevel = this.getCountOfTents();
 
   }
 
@@ -179,6 +182,19 @@ export class BoardComponent {
     return countOfPutTents;
   }
   
+  private getCountOfTents():number{
+    let countOfTents = 0;
+    
+    this.correctLevel.forEach((element,index,items)=>{
+      this.correctLevel[index].forEach((element,index,items)=>{
+        if(element==3)
+          countOfTents++;
+      });
+    });
+    
+    return countOfTents;
+  }
+
   /*public callFinalDialog(): void{
     showFinal();
   }*/
