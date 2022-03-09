@@ -1,8 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
-import { SignsComponent } from '../signs/signs.component';
+import { Board } from '../models/board';
+//import data from '../../assets/map_5x5/level1_5x5.json';
 
-//declare const showFinal: Function;
+import * as data from '../../assets/map_5x5/level1_5x5.json';
+import * as data2 from '../../assets/map_6x6/level1_6x6.json';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -13,82 +16,84 @@ import { SignsComponent } from '../signs/signs.component';
 
 export class BoardComponent {
 
-  private sideSize = 5;
+  private sideSize = 0;
   private matrizSize = this.sideSize * this.sideSize;
   public squares: any[] = [];
 
-  public topCountofTents: number[] = [2, 0, 1, 1, 1];
-  public leftCountofTents: number[] = [1, 1, 0, 2, 1];
+  public levelName: string="";
 
-  public items: number[] = [1, 1, 1, 1, 1,
+  public topCountofTents: number[] = [];
+  public leftCountofTents: number[] = [];
+  private countOfTentsInLevel: number = 0;
+
+  private startTime: any;     // startTime? :Date;
+  private endTime: any;       // endTime? :Date;
+  public gameTime: string = "";
+
+  public items: number[] = [];
+  /*public items: number[] = [1, 1, 1, 1, 1,
     1, 0, 1, 0, 1,
     1, 1, 1, 1, 1,
     0, 0, 1, 1, 1,
-    1, 1, 1, 1, 0];
+    1, 1, 1, 1, 0];*/
 
-  public correctLvl: number[] = [1, 1, 1, 3, 1,
+  public correctLvl: number[] = [];
+  /*public correctLvl: number[] = [1, 1, 1, 3, 1,
     3, 0, 1, 0, 1,
     1, 1, 1, 1, 1,
     0, 0, 3, 1, 3,
-    3, 1, 1, 1, 0];
+    3, 1, 1, 1, 0];*/
 
+  public startLevel: number[][]= [];
+  public correctLevel: number[][]=[];
+    
   public datas: number[] = [];
+  public levelFromJson: any;
 
   public levelIsEnd = false;
 
-  constructor() { }
+
+  constructor(private router: Router) { 
+
+
+  }
 
   ngOnInit(): void {
-    this.newGame();
+    this.newGame(data);
   }
 
   reset(): void {
-    this.newGame();
+    this.newGame(data);
   }
 
-  newGame() {
-    //this.datas = this.items;
+  newGame(lvl:any) {
+
+    let level: Board =  JSON.parse(JSON.stringify(lvl));
+
+    this.sideSize = level.startLevel.length;
+    this.sideSize = level.startLevel.length;
+    this.matrizSize = this.sideSize*this.sideSize;
+    this.topCountofTents = level.columnValues;
+    this.leftCountofTents = level.rowValues;
+    this.startLevel = level.startLevel;
+    this.correctLevel = level.correctLevel;
+    this.levelName = level.nameLevel;
+
 
     this.levelIsEnd = false;
+    //this.datas = [];
 
-    this.datas = [];
-
-    this.items.forEach((element, index, items) => {
+    /*this.items.forEach((element, index, items) => {
       this.datas.push(items[index]);
       //this.datas.push(element);
-    });
+    });*/
 
-    //this.createBoard();
-    //this.squares = Array(this.matrizSize).fill(null);
+    this.countOfTentsInLevel = this.getCountOfTents();
+    this.startTime = new Date();
   }
 
   createBoard(): void {
-    /*for (let i = 1; i <= this.matrizSize; ++i) {
-      let div = document.createElement('div');
-      div.classList.add('tiles');
-      if (i % this.sideSize === 1) div.style.clear = 'both';
 
-      document.getElementById('board')?.appendChild(div);
-    }*/
-
-    /*for (let i = 0; i < 5; ++i) {
-      let divRow = document.createElement('div');
-      for (let j = 0; j < 5; ++j) {
-        let divCell = document.createElement('div');
-        divCell.innerHTML = ((i * 5) + (j + 1)).toString();
-        //divCell.classList.add('tiles');
-        
-        if(this.datas[((i * 5) + (j + 1))-1] == 0){
-          divCell.classList.add('tree');
-        }
-        else{
-          divCell.classList.add('blackGround');
-        }
-        
-        divRow.appendChild(divCell);
-      }
-      document.getElementById('board')?.appendChild(divRow);
-    }*/
   }
 
   clickTile(val: number): void {
@@ -104,18 +109,44 @@ export class BoardComponent {
     }
   }
 
+  clickTile2(x:number, y:number):void{
+    if(!this.levelIsEnd){
+      if(this.startLevel[x][y] !==3){
+        this.startLevel[x][y]+=1;
+      }
+      else{
+        this.startLevel[x][y]=1;
+      }
+
+      this.check_LevelIsEnd2();
+      this.levelIsEnd ? this.newGame(data2): 0;
+      
+      /*if(this.levelIsEnd){
+        this.endTime = new Date();
+        let time = this.endTime - this.startTime
+        
+        let seconds = Math.floor((time / 1000) % 60);
+        let minutes = Math.floor((time / (1000 * 60)) % 60);
+        //let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+
+        this.gameTime = minutes + ":" + seconds;
+
+        //this.router.navigate(['/final-dialog']);
+
+
+      }*/
+
+
+
+    }
+  }
+
   check_LevelIsEnd(): void {
 
-    if(this.checkCountOfTents() === 5){
+    if(this.checkCountOfTents() === this.countOfTentsInLevel){
       let isCorrect = 0;
   
       this.correctLvl.forEach((element, index, items) => {
-        /*if (this.datas[index] != this.correctLvl[index]) {
-          //alert('Incorrect');
-        }
-        else {
-          isCorrect++;
-        }*/
 
         if(element === 3){
           if(this.datas[index] === this.correctLvl[index]){
@@ -125,11 +156,30 @@ export class BoardComponent {
 
       });
   
-      isCorrect === 5 /*this.datas.length*/ ? this.levelIsEnd = true : false;
+      isCorrect === this.countOfTentsInLevel /*this.datas.length*/ ? this.levelIsEnd = true : false;
       
       return;
     }
 
+  }
+
+  check_LevelIsEnd2():void{
+    if(this.checkCountOfTents2() === this.countOfTentsInLevel){
+      let isCorrect=0;
+
+      this.correctLevel.forEach((element, i, items)=>{
+        this.correctLevel[i].forEach((element, j ,items)=>{
+          if(element === 3){
+            if(this.startLevel[i][j] === this.correctLevel[i][j])
+              isCorrect++;
+          }
+        })
+      });
+
+      /*count of tents*/
+      isCorrect === this.countOfTentsInLevel ? this.levelIsEnd = true: false;
+      return;
+    }
   }
 
   private checkCountOfTents(): number{
@@ -142,7 +192,32 @@ export class BoardComponent {
     return countOfPutTents;
   }
 
+  private checkCountOfTents2(): number{
+    let countOfPutTents = 0;
+
+    this.startLevel.forEach((element,index,items)=>{
+      this.startLevel[index].forEach((element,index,items)=>{
+        if(element==3)
+          countOfPutTents++;
+      });
+    });
+
+    return countOfPutTents;
+  }
   
+  private getCountOfTents():number{
+    let countOfTents = 0;
+    
+    this.correctLevel.forEach((element,index,items)=>{
+      this.correctLevel[index].forEach((element,index,items)=>{
+        if(element==3)
+          countOfTents++;
+      });
+    });
+
+    return countOfTents;
+  }
+
   /*public callFinalDialog(): void{
     showFinal();
   }*/

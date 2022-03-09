@@ -1,4 +1,7 @@
 export interface Board{
-    array_2d: number[][];
+    startLevel: number[][];
     correctLevel: number[][];
+    columnValues: number[];
+    rowValues: number[];
+    nameLevel: string;
 }

@@ -1,6 +1,6 @@
 #gameArea{
     margin: 30px auto 30px auto;
-    width: 80%;
+    width: 100%;
 }
 
 #signs{
@@ -16,7 +16,7 @@
 
 #all{
     width: 60%;
-    margin: auto;
+    /*margin: auto;*/
 }
 
 .blackGround{
@@ -69,8 +69,7 @@
 #top{
     width: 50px;
     height: 50px;
-    margin: 2px;
-    grid-gap: 0px;
+    margin: 1px;
     float: left;
     text-align: center;
 }
@@ -79,7 +78,6 @@
     width: 50px;
     height: 50px;
     margin: 2px;
-    grid-gap: 0px;
     text-align: center;
 }
 
