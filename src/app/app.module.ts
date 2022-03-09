@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { FinalDialogComponent } from './final-dialog/final-dialog.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
-    FinalDialogComponent
+    FinalDialogComponent,
+    MainMenuComponent
   ],
   imports: [
     BrowserModule,
