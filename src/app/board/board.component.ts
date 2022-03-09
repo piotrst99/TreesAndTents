@@ -5,7 +5,7 @@ import { Board } from '../models/board';
 
 import * as data from '../../assets/map_5x5/level1_5x5.json';
 import * as data2 from '../../assets/map_6x6/level1_6x6.json';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -15,10 +15,6 @@ import { Router } from '@angular/router';
 })
 
 export class BoardComponent {
-
-  private sideSize = 0;
-  private matrizSize = this.sideSize * this.sideSize;
-  public squares: any[] = [];
 
   public levelName: string="";
 
@@ -30,32 +26,15 @@ export class BoardComponent {
   private endTime: any;       // endTime? :Date;
   public gameTime: string = "";
 
-  public items: number[] = [];
-  /*public items: number[] = [1, 1, 1, 1, 1,
-    1, 0, 1, 0, 1,
-    1, 1, 1, 1, 1,
-    0, 0, 1, 1, 1,
-    1, 1, 1, 1, 0];*/
-
-  public correctLvl: number[] = [];
-  /*public correctLvl: number[] = [1, 1, 1, 3, 1,
-    3, 0, 1, 0, 1,
-    1, 1, 1, 1, 1,
-    0, 0, 3, 1, 3,
-    3, 1, 1, 1, 0];*/
-
   public startLevel: number[][]= [];
   public correctLevel: number[][]=[];
     
   public datas: number[] = [];
-  public levelFromJson: any;
-
   public levelIsEnd = false;
 
 
-  constructor(private router: Router) { 
-
-
+  constructor() { 
+    
   }
 
   ngOnInit(): void {
@@ -70,9 +49,6 @@ export class BoardComponent {
 
     let level: Board =  JSON.parse(JSON.stringify(lvl));
 
-    this.sideSize = level.startLevel.length;
-    this.sideSize = level.startLevel.length;
-    this.matrizSize = this.sideSize*this.sideSize;
     this.topCountofTents = level.columnValues;
     this.leftCountofTents = level.rowValues;
     this.startLevel = level.startLevel;
@@ -96,18 +72,7 @@ export class BoardComponent {
 
   }
 
-  clickTile(val: number): void {
-    if(!this.levelIsEnd){
-      if (this.datas[val] !== 3) {
-        this.datas[val] += 1;
-      }
-      else {
-        this.datas[val] = 1;
-      }
   
-      this.check_LevelIsEnd();
-    }
-  }
 
   clickTile2(x:number, y:number):void{
     if(!this.levelIsEnd){
@@ -141,27 +106,6 @@ export class BoardComponent {
     }
   }
 
-  check_LevelIsEnd(): void {
-
-    if(this.checkCountOfTents() === this.countOfTentsInLevel){
-      let isCorrect = 0;
-  
-      this.correctLvl.forEach((element, index, items) => {
-
-        if(element === 3){
-          if(this.datas[index] === this.correctLvl[index]){
-            isCorrect++;
-          }
-        }
-
-      });
-  
-      isCorrect === this.countOfTentsInLevel /*this.datas.length*/ ? this.levelIsEnd = true : false;
-      
-      return;
-    }
-
-  }
 
   check_LevelIsEnd2():void{
     if(this.checkCountOfTents2() === this.countOfTentsInLevel){
@@ -180,16 +124,6 @@ export class BoardComponent {
       isCorrect === this.countOfTentsInLevel ? this.levelIsEnd = true: false;
       return;
     }
-  }
-
-  private checkCountOfTents(): number{
-    let countOfPutTents = 0;
-    this.datas.forEach((element, index, items) => {
-      if(element == 3)
-        countOfPutTents++;
-    });
-
-    return countOfPutTents;
   }
 
   private checkCountOfTents2(): number{
@@ -217,9 +151,5 @@ export class BoardComponent {
 
     return countOfTents;
   }
-
-  /*public callFinalDialog(): void{
-    showFinal();
-  }*/
 
 }

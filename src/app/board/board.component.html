@@ -49,19 +49,19 @@
 </div>
 
 <div style="margin-left: 50px;">
-    <div style="float: left; background-color: red; width: 50px; height: 50px;"></div>
-    <div style="float: left; background-color: lightblue; height: 50px;">
+    <div style="float: left;  width: 50px; height: 50px;"></div>
+    <div style="float: left;  height: 50px;">
         <div id="top" *ngFor="let val of topCountofTents; let i=index">
             <div>{{topCountofTents[i]}}</div>
         </div>
     </div>
     <div style="clear: both;"></div>
-    <div style="float: left; background-color: green; width: 50px;">
+    <div style="float: left;  width: 50px;">
         <div id="left" *ngFor="let val of leftCountofTents; let i=index">
             <div>{{leftCountofTents[i]}}</div>
         </div>
     </div>
-    <div style="float: left; background-color: yellow; ">
+    <div style="float: left;  ">
         <!--<div id="board">
             <div *ngFor="let val of datas; let i=index">
                 <div *ngIf="datas[i]==0" class="tree tile">
