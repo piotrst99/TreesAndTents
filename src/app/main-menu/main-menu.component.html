@@ -1,1 +1,14 @@
 <div id="selectLvl">Select level</div>
+
+<p style="font-size: 20px; font-weight: 500;">Board size</p>
+
+<!--<select (change)="selectBoardSize($event)" class="form-select" style="width: 130px;">-->
+<select (change)="selectBoardSize($event)" [(ngModel)]="selectedSize" class="form-select" style="width: 130px;">
+    <!--<option *ngFor="let item of boardSizes; let i= index" [ngValue]="i">{{item}}</option>-->
+    <option *ngFor="let item of boardSizes;" [ngValue]="item">{{item}}</option>
+</select>
+
+<div>
+    <app-board *ngIf="selectedSize === boardSizes[0] "></app-board>
+    <div *ngIf="selectedSize === boardSizes[1]">Plansza 6x6</div>
+</div>
