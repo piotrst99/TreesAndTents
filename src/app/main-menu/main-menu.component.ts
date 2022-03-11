@@ -11,13 +11,16 @@ export class MainMenuComponent {
   public selectedSize: string = '';
   //public index: number = 0;
 
+  public levels: string[] = [];
+
   public showLevels():void{
     
   }
 
   selectBoardSize(event: any): void{
-    //console.log(this.selectedSize);
-    
+    import('../../assets/LevelList.json').then(m => {
+      this.levels = m.default[this.selectedSize];
+    });
   }
 
   constructor() { }

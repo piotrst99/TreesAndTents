@@ -3,8 +3,8 @@ import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
 import { Board } from '../models/board';
 //import data from '../../assets/map_5x5/level1_5x5.json';
 
-import * as data from '../../assets/map_5x5/level1_5x5.json';
-import * as data2 from '../../assets/map_6x6/level1_6x6.json';
+import * as data from '../../assets/map_5x5/Level1_5x5.json';
+import * as data2 from '../../assets/map_6x6/Level1_6x6.json';
 //import { Router } from '@angular/router';
 
 @Component({
