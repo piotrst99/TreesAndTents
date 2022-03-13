@@ -8,7 +8,7 @@
     <option *ngFor="let item of boardSizes; let i = index;" [ngValue]="item">{{item}}</option>
 </select>
 
-<div>
+<div *ngIf="!levelIsSelected" style="width: 90%; margin: auto;">
     <!--<app-board *ngIf="selectedSize === boardSizes[0] "></app-board>-->
     <!--<div *ngIf="selectedSize === boardSizes[0]">
         <div>Plansze 5 x 5</div>
@@ -24,7 +24,25 @@
     </div>-->
     <div>Plansze {{selectedSize}}</div>
     <div>
-        <div *ngFor="let item of levels" style="cursor: pointer;">{{item}}</div>
+        <div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="test" style="cursor: pointer;">{{item}}</div>
+        <div style="clear: both;"></div>
     </div>
 </div>
 
+<app-board *ngIf="levelIsSelected" lvl="{{levelName}}" map="{{selectedSize}}"></app-board>
+
+<style>
+.test{
+    float: left;
+    width: 10%;
+    height: 120px;
+    color: bisque;
+    background-color: darkgrey;
+    margin: 5px;
+}
+
+.test:hover{
+    background-color: rgb(139,139,139);
+}
+
+</style>

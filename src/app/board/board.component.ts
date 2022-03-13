@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
 import { Board } from '../models/board';
 //import data from '../../assets/map_5x5/level1_5x5.json';
@@ -15,6 +15,9 @@ import * as data2 from '../../assets/map_6x6/Level1_6x6.json';
 })
 
 export class BoardComponent {
+
+  @Input() lvl: string = '';
+  @Input() map: string = '';
 
   public levelName: string="";
 
@@ -34,11 +37,21 @@ export class BoardComponent {
 
 
   constructor() { 
-    
+    //console.log(this.lvl);
   }
 
   ngOnInit(): void {
-    this.newGame(data);
+    console.log(this.lvl+' '+this.map);
+
+    //let path = `../../assets/`
+
+    import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => {
+      //this.levels = m.default[this.selectedSize];
+      //let level: Board =  JSON.parse(JSON.stringify(m));
+      //console.log(level);
+      this.newGame(m);
+    });
+
   }
 
   reset(): void {
@@ -84,7 +97,8 @@ export class BoardComponent {
       }
 
       this.check_LevelIsEnd2();
-      this.levelIsEnd ? this.newGame(data2): 0;
+      // DO ZMIANY
+      //this.levelIsEnd ? this.newGame(data2): 0;
       
       /*if(this.levelIsEnd){
         this.endTime = new Date();

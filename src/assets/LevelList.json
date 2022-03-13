@@ -4,7 +4,14 @@
         "Level2_5x5.json",
         "Level3_5x5.json",
         "Level4_5x5.json",
-        "Level5_5x5.json"
+        "Level5_5x5.json",
+        "Level6_5x5.json",
+        "Level7_5x5.json",
+        "Level8_5x5.json",
+        "Level9_5x5.json",
+        "Level10_5x5.json",
+        "Level11_5x5.json",
+        "Level12_5x5.json"
     ],
     "6 x 6": [
         "Level1_6x6.json",
