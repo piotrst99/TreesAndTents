@@ -32,6 +32,10 @@ export class MainMenuComponent {
     this.selectedSize = this.selectedSize.replace(/\s/g,"");
   }
 
+  backToMenu(): void{
+    this.levelIsSelected = false;
+  }
+
   constructor() { }
 
 
