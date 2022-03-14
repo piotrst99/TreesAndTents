@@ -1,0 +1,42 @@
+
+
+
+<div *ngIf="!levelIsSelected" style="width: 90%; margin: auto;">
+    <div id="selectLvl">Select level</div>
+    <div>
+        <p style="font-size: 20px; font-weight: 500; float: left;">Board size</p>
+        <select (change)="selectBoardSize($event)" [(ngModel)]="selectedSize" class="form-select" style="width: 130px; float: left; margin-left: 30px;">
+            <!--<option *ngFor="let item of boardSizes; let i= index" [ngValue]="i">{{item}}</option>-->
+            <option *ngFor="let item of boardSizes; let i = index;" [ngValue]="item">{{item}}</option>
+        </select>
+        <div style="clear: both;"></div>
+    </div>
+    <!--<select (change)="selectBoardSize($event)" class="form-select" style="width: 130px;">-->
+    <div *ngIf="selectedSize!=''">Plansze {{selectedSize}}</div>
+    <div>
+        <div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="test" style="cursor: pointer;">{{item}}</div>
+        <div style="clear: both;"></div>
+    </div>
+</div>
+
+<div *ngIf="levelIsSelected" style="width: 90%; margin: auto;">
+    <button class="btn btn-primary" (click)="backToMenu()">Back to menu</button>
+    <app-board lvl="{{levelName}}" map="{{selectedSize}}"></app-board>
+
+</div>
+
+<style>
+.test{
+    float: left;
+    width: 10%;
+    height: 120px;
+    color: bisque;
+    background-color: darkgrey;
+    margin: 5px;
+}
+
+.test:hover{
+    background-color: rgb(139,139,139);
+}
+
+</style>

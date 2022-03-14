@@ -1,11 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
 import { Board } from '../models/board';
-//import data from '../../assets/map_5x5/level1_5x5.json';
-
-import * as data from '../../assets/map_5x5/level1_5x5.json';
-import * as data2 from '../../assets/map_6x6/level1_6x6.json';
-//import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -15,6 +10,9 @@ import * as data2 from '../../assets/map_6x6/level1_6x6.json';
 })
 
 export class BoardComponent {
+
+  @Input() lvl: string = '';
+  @Input() map: string = '';
 
   public levelName: string="";
 
@@ -33,16 +31,15 @@ export class BoardComponent {
   public levelIsEnd = false;
 
 
-  constructor() { 
-    
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.newGame(data);
+    //console.log(this.lvl+' '+this.map);
+    import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => {this.newGame(m); });
   }
 
   reset(): void {
-    this.newGame(data);
+    import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
   }
 
   newGame(lvl:any) {
@@ -55,24 +52,13 @@ export class BoardComponent {
     this.correctLevel = level.correctLevel;
     this.levelName = level.nameLevel;
 
-
     this.levelIsEnd = false;
-    //this.datas = [];
-
-    /*this.items.forEach((element, index, items) => {
-      this.datas.push(items[index]);
-      //this.datas.push(element);
-    });*/
 
     this.countOfTentsInLevel = this.getCountOfTents();
     this.startTime = new Date();
   }
 
-  createBoard(): void {
-
-  }
-
-  
+  createBoard(): void { }
 
   clickTile2(x:number, y:number):void{
     if(!this.levelIsEnd){
@@ -84,7 +70,8 @@ export class BoardComponent {
       }
 
       this.check_LevelIsEnd2();
-      this.levelIsEnd ? this.newGame(data2): 0;
+      // DO ZMIANY
+      //this.levelIsEnd ? this.newGame(data2): 0;
       
       /*if(this.levelIsEnd){
         this.endTime = new Date();
@@ -100,8 +87,6 @@ export class BoardComponent {
 
 
       }*/
-
-
 
     }
   }
