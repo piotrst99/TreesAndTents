@@ -1,5 +1,40 @@
-#selectLvl{
+.content{
+    width: 90%; 
+    margin: auto;
+}
+
+#selectLvlLabel{
     color: white;
     font-size: 30px;
     font-weight: bold;
+}
+
+#boardSizeLabel{
+    font-size: 20px; 
+    font-weight: 500; 
+    float: left;
+}
+
+.selectLevel{
+    width: 130px; 
+    float: left; 
+    margin-left: 30px;
+}
+
+.levelItem{
+    float: left;
+    width: 10%;
+    height: 60px;
+    color: bisque;
+    background-color: darkgrey;
+    margin: 5px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 20px;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.levelItem:hover{
+    background-color: rgb(139,139,139);
 }
