@@ -7,40 +7,45 @@
 
 <div id="gameArea" >
     <button (click)="reset()" class="btn btn-primary"> Reset </button>
-    
-    <!--<div id="all">
 
-        <div style="margin-left: 50px;">
+    <div style="margin-left: 50px; justify-content: center;">
+        <div style="float: left;  width: 50px; height: 50px;"></div>
+        <div style="float: left;  height: 50px;">
             <div id="top" *ngFor="let val of topCountofTents; let i=index">
                 <div>{{topCountofTents[i]}}</div>
             </div>
         </div>
-    
         <div style="clear: both;"></div>
-    
-        <div style="float: left;">
+        <div style="float: left;  width: 50px;">
             <div id="left" *ngFor="let val of leftCountofTents; let i=index">
                 <div>{{leftCountofTents[i]}}</div>
             </div>
         </div>
+        <div style="float: left;">
+            <div>
+                <div *ngFor="let val of startLevel; let i=index">
+                    
+                    <div style="float: left;" *ngFor="let val2 of startLevel[i]; let j=index">
+                        <div *ngIf="startLevel[i][j]==0" class="tree tile">
+                        </div>
+                        <div *ngIf="startLevel[i][j]==1" class="blackGround tile" (click)="clickTile2(i,j)">
+                        </div>
+                        <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile2(i,j)">
+                        </div>
+                        <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile2(i,j)">
+                        </div>
+                    </div>
     
-        <div id="board" style="float: left;">
-            <div *ngFor="let val of datas; let i=index">
-                <div *ngIf="datas[i]==0" class="tree tile">
-                </div>
-                <div *ngIf="datas[i]==1" class="blackGround tile" (click)="clickTile(i)">
-                </div>
-                <div *ngIf="datas[i]==2" class="grass tile" (click)="clickTile(i)">
-                </div>
-                <div *ngIf="datas[i]==3" class="tent tile" (click)="clickTile(i)">
+    
                 </div>
             </div>
+    
         </div>
-
-    </div>-->
-
-
-    <div style="clear: both;"></div>
+        <div style="clear: both;"></div>
+        <div>
+            {{gameTime}}
+        </div>
+    </div>
 
     <div *ngIf="levelIsEnd">
         <app-final-dialog></app-final-dialog>
@@ -48,55 +53,4 @@
 
 </div>
 
-<div style="margin-left: 50px;">
-    <div style="float: left;  width: 50px; height: 50px;"></div>
-    <div style="float: left;  height: 50px;">
-        <div id="top" *ngFor="let val of topCountofTents; let i=index">
-            <div>{{topCountofTents[i]}}</div>
-        </div>
-    </div>
-    <div style="clear: both;"></div>
-    <div style="float: left;  width: 50px;">
-        <div id="left" *ngFor="let val of leftCountofTents; let i=index">
-            <div>{{leftCountofTents[i]}}</div>
-        </div>
-    </div>
-    <div style="float: left;  ">
-        <!--<div id="board">
-            <div *ngFor="let val of datas; let i=index">
-                <div *ngIf="datas[i]==0" class="tree tile">
-                </div>
-                <div *ngIf="datas[i]==1" class="blackGround tile" (click)="clickTile(i)">
-                </div>
-                <div *ngIf="datas[i]==2" class="grass tile" (click)="clickTile(i)">
-                </div>
-                <div *ngIf="datas[i]==3" class="tent tile" (click)="clickTile(i)">
-                </div>
-            </div>
-        </div>-->
 
-        <div>
-            <div *ngFor="let val of startLevel; let i=index">
-                
-                <div style="float: left;" *ngFor="let val2 of startLevel[i]; let j=index">
-                    <div *ngIf="startLevel[i][j]==0" class="tree tile">
-                    </div>
-                    <div *ngIf="startLevel[i][j]==1" class="blackGround tile" (click)="clickTile2(i,j)">
-                    </div>
-                    <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile2(i,j)">
-                    </div>
-                    <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile2(i,j)">
-                    </div>
-                    <!--{{startLevel[i][j]}}-->
-                </div>
-
-
-            </div>
-        </div>
-
-    </div>
-    <div style="clear: both;"></div>
-    <div>
-        {{gameTime}}
-    </div>
-</div>
