@@ -32,12 +32,26 @@
     background-color: rgb(61, 61, 61);
 }
 
+.icon{
+    font-size: 30px;
+    text-align: center;
+}
+
+.icon-tree{
+    color: rgb(7, 70, 7);
+}
+
+.icon-campsite{
+    color: rgb(114, 8, 8);
+}
+
 .tree{
     width: 50px;
     height: 50px;
     margin: 2px;
     font-size: 20px;
-    background-color: rgb(7, 70, 7);
+    /*background-color: rgb(7, 70, 7);*/
+    background-color: rgb(56, 201, 56);
 }
 
 .grass{
@@ -58,12 +72,14 @@
     height: 50px;
     margin: 2px;
     font-size: 20px;
-    background-color: rgb(114, 8, 8);
+    /*background-color: rgb(114, 8, 8);*/
+    background-color: rgb(56, 201, 56);
 }
 
 .tent:hover{
     cursor: pointer;
-    background-color: rgb(158, 54, 54);
+    /*background-color: rgb(158, 54, 54);*/
+    background-color: rgb(150, 219, 150);
 }
 
 #top{
