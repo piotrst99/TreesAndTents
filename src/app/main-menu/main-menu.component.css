@@ -3,6 +3,10 @@
     margin: auto;
 }
 
+#selectLevelBox{
+    margin: 20px 0 20px 0;
+}
+
 #selectLvlLabel{
     color: white;
     font-size: 30px;
@@ -10,7 +14,7 @@
 }
 
 #boardSizeLabel{
-    font-size: 20px; 
+    font-size: 22px; 
     font-weight: 500; 
     float: left;
 }
@@ -33,8 +37,10 @@
     font-size: 20px;
     flex-wrap: wrap;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .levelItem:hover{
     background-color: rgb(139,139,139);
+    border: 1px solid rgb(66, 62, 62);
 }

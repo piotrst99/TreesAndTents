@@ -1,7 +1,7 @@
 <div *ngIf="!levelIsSelected" class="content">
     <p id="selectLvlLabel">Select level</p>
     
-    <div>
+    <div id="selectLevelBox">
         <p id="boardSizeLabel">Board size</p>
 
         <select (change)="selectBoardSize($event)" [(ngModel)]="selectedSize" class="form-select selectLevel">

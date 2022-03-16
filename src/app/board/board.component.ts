@@ -30,6 +30,7 @@ export class BoardComponent {
   public datas: number[] = [];
   public levelIsEnd = false;
 
+  public playerMoves: number[][] = [];
 
   constructor() { }
 
@@ -56,6 +57,7 @@ export class BoardComponent {
 
     this.countOfTentsInLevel = this.getCountOfTents();
     this.startTime = new Date();
+    this.playerMoves = [];
   }
 
   createBoard(): void { }
@@ -63,31 +65,25 @@ export class BoardComponent {
   clickTile2(x:number, y:number):void{
     if(!this.levelIsEnd){
       if(this.startLevel[x][y] !==3){
+        // [X, Y, previous state, current state]
+        this.playerMoves.push([x, y, this.startLevel[x][y], this.startLevel[x][y]+1]);
         this.startLevel[x][y]+=1;
       }
       else{
         this.startLevel[x][y]=1;
+        this.playerMoves.push([x, y, 3, 1]);
       }
 
       this.check_LevelIsEnd2();
-      // DO ZMIANY
-      //this.levelIsEnd ? this.newGame(data2): 0;
-      
-      /*if(this.levelIsEnd){
-        this.endTime = new Date();
-        let time = this.endTime - this.startTime
-        
-        let seconds = Math.floor((time / 1000) % 60);
-        let minutes = Math.floor((time / (1000 * 60)) % 60);
-        //let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+    }
+  }
 
-        this.gameTime = minutes + ":" + seconds;
-
-        //this.router.navigate(['/final-dialog']);
-
-
-      }*/
-
+  undoMove(): void{
+    if(!this.levelIsEnd && this.playerMoves.length!==0){
+      let id = this.playerMoves.length-1;
+      let data = this.playerMoves[id];
+      this.startLevel[data[0]][data[1]] = data[2];
+      this.playerMoves.pop();
     }
   }
 
@@ -105,7 +101,7 @@ export class BoardComponent {
         })
       });
 
-      /*count of tents*/
+      /*check count of tents*/
       isCorrect === this.countOfTentsInLevel ? this.levelIsEnd = true: false;
       return;
     }

@@ -14,24 +14,6 @@
     grid-template-rows: repeat(5,52px);
 }
 
-#all{
-    width: 60%;
-    /*margin: auto;*/
-}
-
-.blackGround{
-    width: 50px;
-    height: 50px;
-    margin: 2px;
-    font-size: 20px;
-    background-color: rgb(32, 29, 29);
-}
-
-.blackGround:hover{
-    cursor: pointer;
-    background-color: rgb(61, 61, 61);
-}
-
 .icon{
     font-size: 30px;
     text-align: center;
@@ -45,84 +27,53 @@
     color: rgb(114, 8, 8);
 }
 
-.tree{
+.ground{
     width: 50px;
     height: 50px;
     margin: 2px;
     font-size: 20px;
-    /*background-color: rgb(7, 70, 7);*/
-    background-color: rgb(56, 201, 56);
+    background-color: rgb(32, 29, 29);
+    border-radius: 3px;
 }
 
-.grass{
+.ground:hover{
+    cursor: pointer;
+    background-color: rgb(61, 61, 61);
+    border: 1px solid rgb(20, 18, 18);
+}
+
+.tree, .grass, .tent{
     width: 50px;
     height: 50px;
     margin: 2px;
     font-size: 20px;
     background-color: rgb(56, 201, 56);
+    border-radius: 3px;
 }
 
-.grass:hover{
+.grass:hover, .tent:hover{
     cursor: pointer;
     background-color: rgb(150, 219, 150);
+    border: 1px solid rgb(34, 58, 34);
 }
 
-.tent{
+.top{
     width: 50px;
     height: 50px;
-    margin: 2px;
-    font-size: 20px;
-    /*background-color: rgb(114, 8, 8);*/
-    background-color: rgb(56, 201, 56);
-}
-
-.tent:hover{
-    cursor: pointer;
-    /*background-color: rgb(158, 54, 54);*/
-    background-color: rgb(150, 219, 150);
-}
-
-#top{
-    width: 50px;
-    height: 50px;
-    margin: 1px;
+    margin: 0 2px 0 2px;
     float: left;
     text-align: center;
 }
 
-#left{
+.left{
     width: 50px;
     height: 50px;
-    margin: 2px;
+    margin: 3.5px 0 3.5px 0;
     text-align: center;
 }
 
-
-
-/*.tiles{
-    background-color: rgb(32, 29, 29);
-    width: 50px;
-    height: 50px;
-    margin: 2px;
-    font-size: 20px;
-    color: white;
+.countOfTents{
+    font-size: 25px;
+    line-height: 50px;
 }
 
-.tiles:hover{
-    cursor: pointer;
-    background-color: rgb(61, 61, 61);
-}*/
-
-/*.e{
-    background-color: aqua;
-    width: 50px;
-    height: 50px;
-    margin: 2px;
-}
-
-#t{
-    display: grid;
-    grid-template-columns: repeat(5,52px);
-    grid-template-rows: repeat(5,52px);
-    grid-gap: 0px;
-}*/
