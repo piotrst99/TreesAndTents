@@ -19,6 +19,7 @@ export class BoardComponent {
   public topCountofTents: number[] = [];
   public leftCountofTents: number[] = [];
   private countOfTentsInLevel: number = 0;
+  private sideSize = 0;
 
   private startTime: any;     // startTime? :Date;
   private endTime: any;       // endTime? :Date;
@@ -29,6 +30,7 @@ export class BoardComponent {
     
   public datas: number[] = [];
   public levelIsEnd = false;
+  public levelIsIncorrect = false;
 
   public playerMoves: number[][] = [];
 
@@ -52,6 +54,7 @@ export class BoardComponent {
     this.startLevel = level.startLevel;
     this.correctLevel = level.correctLevel;
     this.levelName = level.nameLevel;
+    this.sideSize = level.startLevel.length;
 
     this.levelIsEnd = false;
 
@@ -87,6 +90,30 @@ export class BoardComponent {
     }
   }
 
+  checkTents():void{
+    this.startLevel.forEach((element, i, items)=>{
+      this.startLevel[i].forEach((element, j ,items)=>{
+        if(element === 3){
+          if(this.AdjacentTentsAreExists(i,j)){
+            this.levelIsIncorrect = true;
+            return;
+          }
+          this.levelIsIncorrect = false;
+        }
+      });
+    });
+  }
+
+  private AdjacentTentsAreExists(x: number, y:number): boolean{
+    for(let i=x-1; i<=x+1; i++){
+      for(let j=y-1; j<=y+1; j++){
+        if(i>=0 && i<=this.sideSize-1 && j>=0 && j<=this.sideSize-1 && (i!=x || j!=y))
+          if(this.startLevel[i][j] === 3)
+            return true;
+      }
+    }
+    return false;
+  }
 
   check_LevelIsEnd2():void{
     if(this.checkCountOfTents2() === this.countOfTentsInLevel){

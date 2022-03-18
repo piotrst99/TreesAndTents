@@ -5,6 +5,7 @@
 <div id="gameArea" >
     <button (click)="reset()" class="btn btn-primary"> Reset </button>
     <button (click)="undoMove()" class="btn btn-warning" style="margin-left:20px;"> Undo </button>
+    <button (click)="checkTents()" class="btn btn-info" style="margin-left:20px;"> Check </button>
 
     <div style="margin-left: 50px; justify-content: center;">
         <div style="float: left;  width: 50px; height: 50px;"></div>
@@ -53,6 +54,10 @@
 
     <div *ngIf="levelIsEnd">
         <app-final-dialog></app-final-dialog>
+    </div>
+
+    <div *ngIf="levelIsIncorrect">
+        <span style="color: red; font-size: 30px; ">Znaleziono błąd</span>
     </div>
 
 </div>
