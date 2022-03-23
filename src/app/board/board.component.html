@@ -32,11 +32,11 @@
                         <div *ngIf="startLevel[i][j]==0" class="tree tile">
                             <i class="icon-tree icon"></i>
                         </div>
-                        <div *ngIf="startLevel[i][j]==1" class="ground tile" (click)="clickTile2(i,j)">
+                        <div *ngIf="startLevel[i][j]==1" class="ground tile" (click)="clickTile(i,j)">
                         </div>
-                        <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile2(i,j)">
+                        <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile(i,j)">
                         </div>
-                        <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile2(i,j)">
+                        <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile(i,j)">
                             <i class="icon-campsite icon"></i>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
     </div>
 
     <div *ngIf="levelIsIncorrect">
-        <span style="color: red; font-size: 30px; ">Znaleziono błąd</span>
+        <span style="color: red; font-size: 30px; ">Mistakes found</span>
     </div>
 
 </div>

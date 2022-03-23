@@ -57,6 +57,7 @@ export class BoardComponent {
     this.sideSize = level.startLevel.length;
 
     this.levelIsEnd = false;
+    this.levelIsIncorrect = false;
 
     this.countOfTentsInLevel = this.getCountOfTents();
     this.startTime = new Date();
@@ -65,7 +66,8 @@ export class BoardComponent {
 
   createBoard(): void { }
 
-  clickTile2(x:number, y:number):void{
+  clickTile(x:number, y:number):void{
+    this.levelIsIncorrect = false;
     if(!this.levelIsEnd){
       if(this.startLevel[x][y] !==3){
         // [X, Y, previous state, current state]
@@ -77,11 +79,15 @@ export class BoardComponent {
         this.playerMoves.push([x, y, 3, 1]);
       }
 
-      this.check_LevelIsEnd2();
+      this.check_LevelIsEnd();
+    }
+    else{
+      this.putGrass();
     }
   }
 
   undoMove(): void{
+    this.levelIsIncorrect = false;
     if(!this.levelIsEnd && this.playerMoves.length!==0){
       let id = this.playerMoves.length-1;
       let data = this.playerMoves[id];
@@ -94,7 +100,7 @@ export class BoardComponent {
     this.startLevel.forEach((element, i, items)=>{
       this.startLevel[i].forEach((element, j ,items)=>{
         if(element === 3){
-          if(this.AdjacentTentsAreExists(i,j)){
+          if(this.AdjacentTentsAreExists(i,j) || !this.PuttedTentInCorrectPlace(i,j)){
             this.levelIsIncorrect = true;
             return;
           }
@@ -115,8 +121,12 @@ export class BoardComponent {
     return false;
   }
 
-  check_LevelIsEnd2():void{
-    if(this.checkCountOfTents2() === this.countOfTentsInLevel){
+  private PuttedTentInCorrectPlace(x: number, y: number): boolean{
+    return this.startLevel[x][y] === this.correctLevel[x][y];
+  }
+
+  check_LevelIsEnd():void{
+    if(this.checkCountOfTents() === this.countOfTentsInLevel){
       let isCorrect=0;
 
       this.correctLevel.forEach((element, i, items)=>{
@@ -130,11 +140,16 @@ export class BoardComponent {
 
       /*check count of tents*/
       isCorrect === this.countOfTentsInLevel ? this.levelIsEnd = true: false;
+      
+      if(this.levelIsEnd){
+        this.putGrass();
+      }
+
       return;
     }
   }
 
-  private checkCountOfTents2(): number{
+  private checkCountOfTents(): number{
     let countOfPutTents = 0;
 
     this.startLevel.forEach((element,index,items)=>{
@@ -158,6 +173,16 @@ export class BoardComponent {
     });
 
     return countOfTents;
+  }
+
+  private putGrass(): void{
+    this.startLevel.forEach((element, i, items)=>{
+      this.startLevel[i].forEach((element, j ,items)=>{
+        if(element === 1){
+          this.startLevel[i][j]++;
+        }
+      })
+    });
   }
 
 }
