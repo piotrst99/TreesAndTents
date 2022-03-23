@@ -5,6 +5,7 @@
 <div id="gameArea" >
     <button (click)="reset()" class="btn btn-primary"> Reset </button>
     <button (click)="undoMove()" class="btn btn-warning" style="margin-left:20px;"> Undo </button>
+    <button (click)="checkTents()" class="btn btn-info" style="margin-left:20px;"> Check </button>
 
     <div style="margin-left: 50px; justify-content: center;">
         <div style="float: left;  width: 50px; height: 50px;"></div>
@@ -31,11 +32,11 @@
                         <div *ngIf="startLevel[i][j]==0" class="tree tile">
                             <i class="icon-tree icon"></i>
                         </div>
-                        <div *ngIf="startLevel[i][j]==1" class="ground tile" (click)="clickTile2(i,j)">
+                        <div *ngIf="startLevel[i][j]==1" class="ground tile" (click)="clickTile(i,j)">
                         </div>
-                        <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile2(i,j)">
+                        <div *ngIf="startLevel[i][j]==2" class="grass tile" (click)="clickTile(i,j)">
                         </div>
-                        <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile2(i,j)">
+                        <div *ngIf="startLevel[i][j]==3" class="tent tile" (click)="clickTile(i,j)">
                             <i class="icon-campsite icon"></i>
                         </div>
                     </div>
@@ -53,6 +54,10 @@
 
     <div *ngIf="levelIsEnd">
         <app-final-dialog></app-final-dialog>
+    </div>
+
+    <div *ngIf="levelIsIncorrect">
+        <span style="color: red; font-size: 30px; ">Mistakes found</span>
     </div>
 
 </div>
