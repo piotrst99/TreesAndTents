@@ -7,13 +7,17 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { FinalDialogComponent } from './final-dialog/final-dialog.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { LevelCreatorComponent } from './level-creator/level-creator.component';
+import { SelectLevelComponent } from './select-level/select-level.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     FinalDialogComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    LevelCreatorComponent,
+    SelectLevelComponent
   ],
   imports: [
     BrowserModule,

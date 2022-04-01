@@ -1,5 +1,13 @@
 <div *ngIf="!levelIsSelected" class="content">
-    <p id="selectLvlLabel">Select level</p>
+    <div>
+        <p id="selectLvlLabel">
+            <a routerLink="/select-level" routerLinkActive="active"> Select level </a>
+        </p>
+        <p id="createLvlLabel">
+            <a routerLink="/level-creator" routerLinkActive="active"> Create Level </a>
+        </p>
+        <p style="clear: both;"></p>
+    </div>
     
     <div id="selectLevelBox">
         <p id="boardSizeLabel">Board size</p>
