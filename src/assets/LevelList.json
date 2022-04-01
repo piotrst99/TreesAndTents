@@ -19,5 +19,8 @@
         "Level3_6x6.json",
         "Level4_6x6.json",
         "Level5_6x6.json"
+    ],
+    "7 x 7": [
+        "Level1_7x7.json"
     ]
 }
