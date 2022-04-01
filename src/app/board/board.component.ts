@@ -96,9 +96,16 @@ export class BoardComponent {
     }
   }
 
-  checkTents():void{
+  checkPuttedItems():void{
     this.startLevel.forEach((element, i, items)=>{
       this.startLevel[i].forEach((element, j ,items)=>{
+        if(element === 2){
+          if(!this.PuttedGrassInCorrectPlace(i,j)){
+            this.levelIsIncorrect = true;
+            return;
+          }
+          this.levelIsIncorrect = false;
+        }
         if(element === 3){
           if(this.AdjacentTentsAreExists(i,j) || !this.PuttedTentInCorrectPlace(i,j)){
             this.levelIsIncorrect = true;
@@ -123,6 +130,10 @@ export class BoardComponent {
 
   private PuttedTentInCorrectPlace(x: number, y: number): boolean{
     return this.startLevel[x][y] === this.correctLevel[x][y];
+  }
+
+  private PuttedGrassInCorrectPlace(x: number, y: number):boolean{
+    return this.startLevel[x][y] === this.correctLevel[x][y]+1;
   }
 
   check_LevelIsEnd():void{

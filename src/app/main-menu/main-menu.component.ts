@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent {
   
-  public boardSizes: string[] = ['5 x 5', '6 x 6'];
+  public boardSizes: string[] = ['5 x 5', '6 x 6', '7 x 7'];
   public selectedSize: string = '';
   //public index: number = 0;
   public levelName: string = '';
