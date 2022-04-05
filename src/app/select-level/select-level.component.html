@@ -2,13 +2,19 @@
     <p id="boardSizeLabel">Board size</p>
 
     <select (change)="selectBoardSize($event)" [(ngModel)]="selectedSize" class="form-select selectLevel">
-        <option *ngFor="let item of boardSizes; let i = index;" [ngValue]="item">{{item}}</option>
+        <option *ngFor="let item of boardSizes; let i = index;" [ngValue]="item">{{item}}
+            <!--<a [routerLink]="['select-level/','{{item}}']">{{item}}</a>-->
+        </option>
     </select>
 
     <div style="clear: both;"></div>
 </div>
 
 <div>
-    <div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="levelItem">Level {{i+1}}</div>
+    <!--<div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="levelItem">Level {{i+1}}</div>-->
+    <div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="levelItem">
+        <!--<a routerLink="{{selectedSize}}/Level{{i+1}}">Level {{i+1}}</a>-->
+        <a routerLink="{{selectedSize}}/Level{{i+1}}">Level {{i+1}}</a>
+    </div>
     <div style="clear: both;"></div>
 </div>

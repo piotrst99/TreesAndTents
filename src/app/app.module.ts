@@ -9,6 +9,7 @@ import { FinalDialogComponent } from './final-dialog/final-dialog.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { LevelCreatorComponent } from './level-creator/level-creator.component';
 import { SelectLevelComponent } from './select-level/select-level.component';
+import { ListLevelsComponent } from './list-levels/list-levels.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SelectLevelComponent } from './select-level/select-level.component';
     FinalDialogComponent,
     MainMenuComponent,
     LevelCreatorComponent,
-    SelectLevelComponent
+    SelectLevelComponent,
+    ListLevelsComponent
   ],
   imports: [
     BrowserModule,

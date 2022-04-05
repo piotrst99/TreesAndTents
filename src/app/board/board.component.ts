@@ -1,4 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
 import { Board } from '../models/board';
 
@@ -34,11 +35,13 @@ export class BoardComponent {
 
   public playerMoves: number[][] = [];
 
-  constructor() { }
+  constructor(private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    //console.log(this.lvl+' '+this.map);
-    import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => {this.newGame(m); });
+    this.router.params.forEach(param=>{
+      import('../../assets/map_'+param['size']+'/'+param['nr']+'_'+param['size']+'.json').
+        then(m => {this.newGame(m); });
+    });
   }
 
   reset(): void {

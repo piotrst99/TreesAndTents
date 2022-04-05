@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-select-level',
@@ -11,6 +12,7 @@ export class SelectLevelComponent{
   public selectedSize: string = '';
   //public index: number = 0;
   public levelName: string = '';
+  public levelURL = '';
 
   public levels: string[] = [];
   public levelIsSelected: boolean = false;
@@ -18,7 +20,10 @@ export class SelectLevelComponent{
   selectBoardSize(event: any): void{
     import('../../assets/LevelList.json').then(m => {
       this.levels = m.default[this.selectedSize];
+      this.selectedSize = this.selectedSize.replace(/\s/g,"");
     });
+    //this.route.params.subscribe(params=>console.log(this.selectedSize.replace(/\s/g,"")));
+    //this.route.navigate
   }
 
   selectLevel(nr: number):void{
@@ -26,12 +31,18 @@ export class SelectLevelComponent{
     this.levelName = this.levels[nr];
     this.levelIsSelected= true;
     this.selectedSize = this.selectedSize.replace(/\s/g,"");
+    //this.levelURL = this.selectedSize+'_Level'+(nr+1);
+    this.levelURL = 'Level'+(nr+1)+'_5x5';
+    //console.log(this.levelURL);
+    //console.log(this.selectedSize+'_Level'+(nr+1));
   }
 
   backToMenu(): void{
     this.levelIsSelected = false;
   }
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { 
+    //this.route.params.subscribe(params=>console.log(this.selectedSize));
+  }
 
 }
