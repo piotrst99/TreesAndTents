@@ -1,20 +1,48 @@
 <div id="selectLevelBox">
     <p id="boardSizeLabel">Board size</p>
 
-    <select (change)="selectBoardSize($event)" [(ngModel)]="selectedSize" class="form-select selectLevel">
-        <option *ngFor="let item of boardSizes; let i = index;" [ngValue]="item">{{item}}
-            <!--<a [routerLink]="['select-level/','{{item}}']">{{item}}</a>-->
+    <!--<select (change)="selectBoardSize($event)" [(ngModel)]="selectedSize" class="form-select selectLevel">
+        <option *ngFor="let item of boardSizes; let i = index;" value="{{item.size}}" [ngValue]="item.size">{{item.size}}
         </option>
-    </select>
+    </select>-->
+    <!--<a [routerLink]="['select-level/','{{item}}']">{{item}}</a>-->
+
+    <ng-select class="selectLevel"
+        [items]="boardSizes"
+        bindValue="size"
+        bindLabel ="size"
+        [(ngModel)]="selectedSize"
+        [clearable]="false"
+        [clearOnBackspace] = "true"
+        (change)="selectBoardSize(selectedSize)"
+        >
+
+    </ng-select>
+
+    <!--<ng-select [(ngModel)]="selectedSize" (change)="selectBoardSize(selectedSize)" class="form-select selectLevel">
+        <ng-option *ngFor="let item of boardSizes;"  [value]="item.size">{{item.size}}</ng-option>
+    
+        
+        
+    </ng-select>-->
+    <!--[selected]="selected(boardSizes.size)"-->
 
     <div style="clear: both;"></div>
 </div>
 
 <div>
     <!--<div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="levelItem">Level {{i+1}}</div>-->
-    <div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="levelItem">
+    <!--<div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="levelItem">-->
+    <div *ngFor="let item of levels; let i=index;" class="levelItem">
         <!--<a routerLink="{{selectedSize}}/Level{{i+1}}">Level {{i+1}}</a>-->
         <a routerLink="{{selectedSize}}/Level{{i+1}}">Level {{i+1}}</a>
     </div>
     <div style="clear: both;"></div>
 </div>
+
+<style>
+a{
+    display: block;
+}
+
+</style>

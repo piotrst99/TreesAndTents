@@ -10,6 +10,8 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { LevelCreatorComponent } from './level-creator/level-creator.component';
 import { SelectLevelComponent } from './select-level/select-level.component';
 import { ListLevelsComponent } from './list-levels/list-levels.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { ListLevelsComponent } from './list-levels/list-levels.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

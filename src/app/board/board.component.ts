@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
 import { Board } from '../models/board';
 
@@ -35,12 +35,19 @@ export class BoardComponent {
 
   public playerMoves: number[][] = [];
 
-  constructor(private router: ActivatedRoute) { }
+  constructor(private router: ActivatedRoute, private _router: Router) { }
 
   ngOnInit(): void {
     this.router.params.forEach(param=>{
-      import('../../assets/map_'+param['size']+'/'+param['nr']+'_'+param['size']+'.json').
-        then(m => {this.newGame(m); });
+      let size = param['size'];
+      let lvl = param['nr'];
+      
+      import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
+      then(m => {this.newGame(m); }).
+      catch((e)=>{
+        alert(lvl+' of '+size+' map not exists');
+        this._router.navigate(['select-level']);
+      });
     });
   }
 
