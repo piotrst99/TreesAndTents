@@ -52,7 +52,18 @@ export class BoardComponent {
   }
 
   reset(): void {
-    import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
+    //import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
+    this.router.params.forEach(param=>{
+      let size = param['size'];
+      let lvl = param['nr'];
+      
+      import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
+      then(m => {this.newGame(m); }).
+      catch((e)=>{
+        alert(lvl+' of '+size+' map not exists');
+        this._router.navigate(['select-level']);
+      });
+    });
   }
 
   newGame(lvl:any) {

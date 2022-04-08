@@ -1,1 +1,40 @@
-<p>level-creator works!</p>
+<div>Create level map</div>
+<div id="createLevelBox">
+    <p id="boardSizeLabel">Board size</p>
+
+    <ng-select class="selectLevel"
+        [items]="boardSizes"
+        bindValue="sideSize"
+        bindLabel ="size"
+        [(ngModel)]="selectedSize"
+        [clearable]="false"
+        [clearOnBackspace] = "true"
+        (change)="selectBoardSize(selectedSize)"
+        >
+
+    </ng-select>
+
+    <div style="clear: both;"></div>
+</div>
+
+
+<div *ngIf="sizeIsSelected">
+    <div *ngFor="let val of board; let i=index">
+        <div style="float: left;" *ngFor="let val2 of board[i]; let j=index">
+            <div *ngIf="board[i][j]==0" class="tree tile" (click)="clickTile(i,j)">
+                <i class="icon-tree icon"></i>
+            </div>
+            <div *ngIf="board[i][j]==1" class="ground tile" (click)="clickTile(i,j)">
+            </div>
+            <div *ngIf="board[i][j]==2" class="grass tile" (click)="clickTile(i,j)">
+            </div>
+            <div *ngIf="board[i][j]==3" class="tent tile" (click)="clickTile(i,j)">
+                <i class="icon-campsite icon"></i>
+            </div>
+            <div *ngIf="board[i][j]==4" class="selectedTile tile" (click)="clickTile(i,j)">
+                <i class="icon"></i>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+</div>

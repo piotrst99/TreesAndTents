@@ -15,9 +15,7 @@ export class MainMenuComponent {
   public levels: string[] = [];
   public levelIsSelected: boolean = false;
 
-  public showLevels():void{
-    
-  }
+  //public showLevels():void{}
 
   selectBoardSize(event: any): void{
     import('../../assets/LevelList.json').then(m => {
