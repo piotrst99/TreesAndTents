@@ -18,23 +18,37 @@
 </div>
 
 
-<div *ngIf="sizeIsSelected">
-    <div *ngFor="let val of board; let i=index">
+<!--<div *ngIf="sizeIsSelected">
+    <div class="items" *ngFor="let val of board; let i=index">
         <div style="float: left;" *ngFor="let val2 of board[i]; let j=index">
-            <div *ngIf="board[i][j]==0" class="tree tile" (click)="clickTile(i,j)">
+            <div *ngIf="board[i][j]===1" class="tile ground" (click)="clickTile(i,j)">
+            </div>
+            <div *ngIf="board[i][j]===0" class="tile tree" (click)="clickTile(i,j)">
                 <i class="icon-tree icon"></i>
             </div>
-            <div *ngIf="board[i][j]==1" class="ground tile" (click)="clickTile(i,j)">
-            </div>
-            <div *ngIf="board[i][j]==2" class="grass tile" (click)="clickTile(i,j)">
-            </div>
-            <div *ngIf="board[i][j]==3" class="tent tile" (click)="clickTile(i,j)">
+            <div *ngIf="board[i][j]===2" class="tile tent" (click)="clickTile(i,j)">
                 <i class="icon-campsite icon"></i>
-            </div>
-            <div *ngIf="board[i][j]==4" class="selectedTile tile" (click)="clickTile(i,j)">
-                <i class="icon"></i>
             </div>
         </div>
         <div style="clear: both;"></div>
     </div>
+</div>-->
+
+<br /><br /><br /><br />
+
+<div *ngIf="sizeIsSelected">
+    <ng-container *ngFor="let row of board; let i=index">
+        <div class="cell"
+            *ngFor="let cell of row; let j=index"
+            [class.tree]="board[i][j] === 0"
+            [class.ground]="board[i][j] === 1"
+            [class.tent]="board[i][j] === 2"
+            (click)="onTileClick(i,j)"
+            style="float:left"
+        >
+        <i *ngIf="board[i][j]===0" class="icon-tree icon"></i>
+        <i *ngIf="board[i][j]===2" class="icon-campsite icon"></i>
+    </div>
+    <div style="clear: both;"></div>
+    </ng-container>
 </div>

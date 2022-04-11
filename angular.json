@@ -31,7 +31,9 @@
               "src/assets/Fontello/css/fontello.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/selectItem.js"
+            ]
           },
           "configurations": {
             "production": {

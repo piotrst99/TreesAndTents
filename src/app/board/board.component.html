@@ -31,7 +31,7 @@
                     <div *ngFor="let val of startLevel; let i=index">
                         
                         <div style="float: left;" *ngFor="let val2 of startLevel[i]; let j=index">
-                            <div *ngIf="startLevel[i][j]==0" class="tree tile">
+                            <div *ngIf="startLevel[i][j]==0" class="tree tile" (click)="clickTile(i,j)">
                                 <i class="icon-tree icon"></i>
                             </div>
                             <div *ngIf="startLevel[i][j]==1" class="ground tile" (click)="clickTile(i,j)">
