@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import * as e from 'express';
+import { elementAt } from 'rxjs';
 
 declare const selectTile: any;
 
@@ -17,6 +19,8 @@ export class LevelCreatorComponent{
   ];
   public selectedSize: number = 0;
   public board: number[][] = [];
+  public countTentsRow: number[] = [];
+  public countTentsColumn: number[] = [];
   public sizeIsSelected = false;
 
   constructor() { }
@@ -43,6 +47,51 @@ export class LevelCreatorComponent{
     else{
       this.board[x][y] = 0;
     }
+  }
+
+  public saveBoard():void{
+    console.log(this.board);
+    if(!this.CountOfTentsAndTreesAreSame() || this.AdjacentTentsAreExists()){
+      alert('Mistakes found!');
+    }
+    else{
+      // Save board to json
+    } 
+  }
+
+  private AdjacentTentsAreExists(): boolean{
+    let result = false;
+    
+    this.board.forEach((element,i,items)=>{
+        this.board[i].forEach((element,j,items)=>{
+          if(element === 2){
+            for(let k=i-1; k<=i+1; k++){
+              for(let l=j-1; l<=j+1; l++){
+                if(k>=0 && k<=this.selectedSize-1 && l>=0 && l<=this.selectedSize-1 && (k!=i || l!=j))
+                  if(this.board[k][l] === 2)
+                    result = true;
+              }
+            }
+          }
+        });
+      });
+    
+    return result;
+  }
+
+  private CountOfTentsAndTreesAreSame(): boolean{
+    let countOfTents = 0, countOfTrees = 0; 
+    
+    this.board.forEach((element,i,items)=>{
+      this.board[i].forEach((element,j,items)=>{
+        if(element === 0)
+          ++countOfTrees;
+        else if(element === 2)
+          ++countOfTents;
+      });
+    });
+
+    return countOfTents === countOfTrees && countOfTents > 0 && countOfTrees > 0;
   }
 
 }
