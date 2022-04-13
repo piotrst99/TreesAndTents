@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import * as e from 'express';
-import { elementAt } from 'rxjs';
+import {Board} from '../models/board'
+
+//const fs = require('fs');
 
 declare const selectTile: any;
 
@@ -26,6 +27,9 @@ export class LevelCreatorComponent{
   constructor() { }
 
   selectBoardSize(event: any): void{
+    this.countTentsColumn = new Array(this.selectedSize).fill(0);
+    this.countTentsRow = new Array(this.selectedSize).fill(0);
+
     this.board = [];
     for(let i=0; i<this.selectedSize; i++){
       this.board.push(new Array(this.selectedSize).fill(1));
@@ -34,9 +38,8 @@ export class LevelCreatorComponent{
   }
   
   public clickTile(x: number, y: number):void{
-    //console.log(x+' '+y);
     this.board[x][y] = 4;
-    selectTile(x, y, this.selectedSize);
+    //selectTile(x, y, this.selectedSize);
   }
 
   public onTileClick(x: number, y: number): void{
@@ -50,12 +53,13 @@ export class LevelCreatorComponent{
   }
 
   public saveBoard():void{
-    console.log(this.board);
-    if(!this.CountOfTentsAndTreesAreSame() || this.AdjacentTentsAreExists()){
+    if(!this.CountOfTentsAndTreesAreSame() || this.AdjacentTentsAreExists() ||
+      !this.AllTentsHasTrees()){
       alert('Mistakes found!');
     }
     else{
       // Save board to json
+      this.SaveToJson(this.board);
     } 
   }
 
@@ -92,6 +96,118 @@ export class LevelCreatorComponent{
     });
 
     return countOfTents === countOfTrees && countOfTents > 0 && countOfTrees > 0;
+  }
+
+  private AllTentsHasTrees():boolean{
+    let countTentsHasTree = Array();
+    this.board.forEach((element,i,items)=>{
+      
+      this.board[i].forEach((element,j,items)=>{
+        let countOfTrees = 0;
+        if(element === 2){
+          //console.log(i+' '+j);
+          if(i > 0)
+            if(this.board[i-1][j] === 0)
+              ++countOfTrees;
+          if(i < this.selectedSize-1)
+            if(this.board[i+1][j] === 0)
+              ++countOfTrees;
+          if(j > 0)
+            if(this.board[i][j-1] === 0)
+              ++countOfTrees;
+          if(j < this.selectedSize-1)
+            if(this.board[i][j+1] === 0)
+              ++countOfTrees;
+          //console.log(countOfTrees);
+          countTentsHasTree.push(countOfTrees);
+          //if(countOfTrees === 0)
+            //return false;
+          //else
+            //++countTentsHasTree;
+          //console.log(countTentsHasTree);
+        }
+        //return true;
+      });
+    });
+    //console.log(countTentsHasTree);
+    let index = countTentsHasTree.findIndex(el => el === 0);
+    return index === -1;
+  }
+
+  private SaveToJson(board: number[][]):void{
+    console.log(board);
+
+    let startLevel = Array();
+    let correctLevel = Array();
+    let columnValues = Array();
+    let rowValues = Array();
+    let nameLevel = "";
+
+    board.forEach((element, i, index)=>{
+      let rowStart = new Array(board.length).fill(0);
+      let rowCorrect = new Array(board.length).fill(0);
+      board[i].forEach((element, j, index)=>{
+        if(element === 2){
+          rowStart[j] = 1;
+          rowCorrect[j] = 3;
+        }
+        else{
+          rowStart[j] = board[i][j];
+          rowCorrect[j] = board[i][j];
+        }
+      });
+      startLevel.push(rowStart);
+      correctLevel.push(rowCorrect);
+    });
+
+    rowValues = this.GetCountOfTentsRow(board);
+    columnValues = this.GetCountOfTentsColumn(board);
+    
+    let boardToSave:any = {
+      "startLevel" : startLevel,
+      "correctLevel" : correctLevel,
+      "columnValues" : columnValues,
+      "rowValues" : rowValues,
+      "nameLevel" : nameLevel,
+    };
+
+    console.log(boardToSave);
+    JSON.stringify(boardToSave);
+
+    var a = document.createElement('a');
+    a.setAttribute('href', 'data:text/plain;charset=utf-u,'+encodeURIComponent(JSON.stringify(boardToSave)));
+    a.setAttribute('download', "test.json");
+    a.click();
+  }
+
+  private GetCountOfTentsRow(board: number[][]): number[]{
+    let rowValues = new Array(board.length).fill(0);
+    
+    board.forEach((element, i, index)=>{
+      let countTents = 0;
+      board[i].forEach((element, j, index)=>{
+        if(element === 2)
+          ++countTents;
+      });
+      rowValues[i] = countTents;
+    });
+
+    return rowValues;
+  }
+
+  private GetCountOfTentsColumn(board: number[][]): number[]{
+    let columnValues = new Array(board.length).fill(0);
+    
+    board.forEach((element, i, index)=>{
+      let countTents = 0;
+      board[i].forEach((element, j, index)=>{
+        if(board[j][i] === 2)
+          ++countTents;
+      });
+      columnValues[i] = countTents;
+    });
+
+    return columnValues;
   }
 
 }
