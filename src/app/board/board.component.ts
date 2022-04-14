@@ -90,17 +90,19 @@ export class BoardComponent {
   clickTile(x:number, y:number):void{
     this.levelIsIncorrect = false;
     if(!this.levelIsEnd){
-      if(this.startLevel[x][y] !==3){
-        // [X, Y, previous state, current state]
-        this.playerMoves.push([x, y, this.startLevel[x][y], this.startLevel[x][y]+1]);
-        this.startLevel[x][y]+=1;
+      if(this.startLevel[x][y] !== 0){
+        if(this.startLevel[x][y] !==3){
+          // [X, Y, previous state, current state]
+          this.playerMoves.push([x, y, this.startLevel[x][y], this.startLevel[x][y]+1]);
+          this.startLevel[x][y]+=1;
+        }
+        else{
+          this.startLevel[x][y]=1;
+          this.playerMoves.push([x, y, 3, 1]);
+        }
+  
+        this.check_LevelIsEnd();
       }
-      else{
-        this.startLevel[x][y]=1;
-        this.playerMoves.push([x, y, 3, 1]);
-      }
-
-      this.check_LevelIsEnd();
     }
     else{
       this.putGrass();
