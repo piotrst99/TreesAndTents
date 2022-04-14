@@ -19,9 +19,17 @@
         "Level2_6x6.json",
         "Level3_6x6.json",
         "Level4_6x6.json",
-        "Level5_6x6.json"
+        "Level5_6x6.json",
+        "Level6_6x6.json",
+        "Level7_6x6.json",
+        "Level8_6x6.json",
+        "Level9_6x6.json",
+        "Level10_6x6.json"
     ],
     "7x7": [
-        "Level1_7x7.json"
+        "Level1_7x7.json",
+        "Level2_7x7.json",
+        "Level3_7x7.json",
+        "Level4_7x7.json"
     ]
 }

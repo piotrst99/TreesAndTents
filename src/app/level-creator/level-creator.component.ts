@@ -63,6 +63,14 @@ export class LevelCreatorComponent{
     } 
   }
 
+  public resetBoard():void{
+    this.board.forEach((element,i,items)=>{
+      this.board[i].forEach((element,j,items)=>{
+        this.board[i][j] = 1;
+      });
+    });
+  }
+
   private AdjacentTentsAreExists(): boolean{
     let result = false;
     
