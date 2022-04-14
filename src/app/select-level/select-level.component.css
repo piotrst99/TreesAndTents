@@ -4,6 +4,8 @@
 }
 
 #selectLevelBox{
+    width: 90%;
+    margin: auto;
     margin: 20px 0 20px 0;
 }
 
@@ -18,6 +20,7 @@
 a{
     color: white;
     text-decoration: none;
+    display: block;
 }
 
 #boardSizeLabel{

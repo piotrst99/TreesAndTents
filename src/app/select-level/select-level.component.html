@@ -1,0 +1,27 @@
+<div id="selectLevelBox">
+    <div class="content">
+        <p id="boardSizeLabel">Board size</p>
+
+        <ng-select class="selectLevel"
+            [items]="boardSizes"
+            bindValue="size"
+            bindLabel ="size"
+            [(ngModel)]="selectedSize"
+            [clearable]="false"
+            [clearOnBackspace] = "true"
+            (change)="selectBoardSize(selectedSize)"
+            >
+        </ng-select>
+
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="content">
+        <div *ngFor="let item of levels; let i=index;" class="levelItem">
+            <a routerLink="{{selectedSize}}/Level{{i+1}}">Level {{i+1}}</a>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    
+</div>
+

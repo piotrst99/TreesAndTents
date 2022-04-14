@@ -1,0 +1,40 @@
+<div class="content">
+    <div id="createLevelBox">
+        <p id="boardSizeLabel">Board size</p>
+    
+        <ng-select class="selectLevel"
+            [items]="boardSizes"
+            bindValue="sideSize"
+            bindLabel ="size"
+            [(ngModel)]="selectedSize"
+            [clearable]="false"
+            [clearOnBackspace] = "true"
+            (change)="selectBoardSize(selectedSize)"
+            >
+    
+        </ng-select>
+    
+        <button (click)="saveBoard()" class="btn btn-primary" style="margin-left: 20px;">Save</button>
+        <button (click)="resetBoard()" class="btn btn-warning" style="margin-left: 20px;">Reset</button>
+    
+        <div style="clear: both;"></div>
+    </div>
+    
+    
+    <div *ngIf="sizeIsSelected">
+        <ng-container *ngFor="let row of board; let i=index">
+            <div class="cell"
+                *ngFor="let cell of row; let j=index"
+                [class.tree]="board[i][j] === 0"
+                [class.ground]="board[i][j] === 1"
+                [class.tent]="board[i][j] === 2"
+                (click)="onTileClick(i,j)"
+                style="float:left"
+            >
+            <i *ngIf="board[i][j]===0" class="icon-tree icon"></i>
+            <i *ngIf="board[i][j]===2" class="icon-campsite icon"></i>
+        </div>
+        <div style="clear: both;"></div>
+        </ng-container>
+    </div>
+</div>

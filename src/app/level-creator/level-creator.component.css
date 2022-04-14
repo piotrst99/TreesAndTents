@@ -1,23 +1,24 @@
 .content{
-    width: 90%; 
+    width: 90%;
     margin: auto;
 }
 
-
-#gameArea{
-    margin: 30px auto 30px auto;
-    width: 100%;
+#createLevelBox{
+    width: 90%;
+    margin: auto;
+    margin: 20px 0 20px 0;
 }
 
-#signs{
-    margin: 30px auto 30px auto;
+#boardSizeLabel{
+    font-size: 22px; 
+    font-weight: 500; 
+    float: left;
 }
 
-#board{
-    grid-gap: 0px;
-    display: grid;
-    grid-template-columns: repeat(5,52px);
-    grid-template-rows: repeat(5,52px);
+.selectLevel{
+    width: 130px; 
+    float: left; 
+    margin-left: 30px;
 }
 
 .icon{
@@ -42,6 +43,15 @@
     border-radius: 3px;
 }
 
+.selectedTile{
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    background-color: rgb(110, 108, 108);
+    border-radius: 3px;
+}
+
 .ground:hover{
     cursor: pointer;
     background-color: rgb(61, 61, 61);
@@ -57,29 +67,8 @@
     border-radius: 3px;
 }
 
-.grass:hover, .tent:hover{
+.grass:hover, .tent:hover, .tree:hover{
     cursor: pointer;
     background-color: rgb(150, 219, 150);
     border: 1px solid rgb(34, 58, 34);
 }
-
-.top{
-    width: 50px;
-    height: 50px;
-    margin: 0 2px 0 2px;
-    float: left;
-    text-align: center;
-}
-
-.left{
-    width: 50px;
-    height: 50px;
-    margin: 3.5px 0 3.5px 0;
-    text-align: center;
-}
-
-.countOfTents{
-    font-size: 25px;
-    line-height: 50px;
-}
-

@@ -1,4 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FinalDialogComponent } from '../final-dialog/final-dialog.component';
 import { Board } from '../models/board';
 
@@ -34,15 +35,35 @@ export class BoardComponent {
 
   public playerMoves: number[][] = [];
 
-  constructor() { }
+  constructor(private router: ActivatedRoute, private _router: Router) { }
 
   ngOnInit(): void {
-    //console.log(this.lvl+' '+this.map);
-    import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => {this.newGame(m); });
+    this.router.params.forEach(param=>{
+      let size = param['size'];
+      let lvl = param['nr'];
+      
+      import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
+      then(m => {this.newGame(m); }).
+      catch((e)=>{
+        alert(lvl+' of '+size+' map not exists');
+        this._router.navigate(['select-level']);
+      });
+    });
   }
 
   reset(): void {
-    import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
+    //import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
+    this.router.params.forEach(param=>{
+      let size = param['size'];
+      let lvl = param['nr'];
+      
+      import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
+      then(m => {this.newGame(m); }).
+      catch((e)=>{
+        alert(lvl+' of '+size+' map not exists');
+        this._router.navigate(['select-level']);
+      });
+    });
   }
 
   newGame(lvl:any) {

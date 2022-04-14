@@ -1,5 +1,5 @@
 {
-    "5 x 5" : [
+    "5x5" : [
         "Level1_5x5.json",
         "Level2_5x5.json",
         "Level3_5x5.json",
@@ -11,16 +11,25 @@
         "Level9_5x5.json",
         "Level10_5x5.json",
         "Level11_5x5.json",
-        "Level12_5x5.json"
+        "Level12_5x5.json",
+        "Level13_5x5.json"
     ],
-    "6 x 6": [
+    "6x6": [
         "Level1_6x6.json",
         "Level2_6x6.json",
         "Level3_6x6.json",
         "Level4_6x6.json",
-        "Level5_6x6.json"
+        "Level5_6x6.json",
+        "Level6_6x6.json",
+        "Level7_6x6.json",
+        "Level8_6x6.json",
+        "Level9_6x6.json",
+        "Level10_6x6.json"
     ],
-    "7 x 7": [
-        "Level1_7x7.json"
+    "7x7": [
+        "Level1_7x7.json",
+        "Level2_7x7.json",
+        "Level3_7x7.json",
+        "Level4_7x7.json"
     ]
 }

@@ -1,24 +1,11 @@
 <div *ngIf="!levelIsSelected" class="content">
-    <p id="selectLvlLabel">Select level</p>
-    
-    <div id="selectLevelBox">
-        <p id="boardSizeLabel">Board size</p>
-
-        <select (change)="selectBoardSize($event)" [(ngModel)]="selectedSize" class="form-select selectLevel">
-            <option *ngFor="let item of boardSizes; let i = index;" [ngValue]="item">{{item}}</option>
-        </select>
-
-        <div style="clear: both;"></div>
-    </div>
-    
     <div>
-        <div *ngFor="let item of levels; let i=index;" (click)="selectLevel(i)" class="levelItem">Level {{i+1}}</div>
-        <div style="clear: both;"></div>
+        <p id="selectLvlLabel">
+            <a routerLink="/select-level" routerLinkActive="active"> Select level </a>
+        </p>
+        <p id="createLvlLabel">
+            <a routerLink="/level-creator" routerLinkActive="active"> Create Level </a>
+        </p>
+        <p style="clear: both;"></p>
     </div>
-
-</div>
-
-<div *ngIf="levelIsSelected" class="content">
-    <button class="btn btn-primary" (click)="backToMenu()">Menu</button>
-    <app-board lvl="{{levelName}}" map="{{selectedSize}}"></app-board>
 </div>
