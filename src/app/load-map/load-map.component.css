@@ -1,0 +1,16 @@
+.content{
+    width: 90%;
+    margin: auto;
+}
+
+.Label{
+    font-size: 22px; 
+    font-weight: 500; 
+    float: left;
+}
+
+#LoadMapBox{
+    width: 90%;
+    margin: auto;
+    margin: 20px 0 20px 0;
+}

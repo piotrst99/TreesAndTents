@@ -1,0 +1,20 @@
+<div class="content" lang="us">
+    <div id="LoadMapBox">
+        <p class="Label">Select file</p>
+
+        <input id="jsonFile" (change)="OnFileSelected($event)"
+            class="form-control form-control-sm" id="formFileSm" type="file" 
+            style="width: 400px; margin-left: 20px; float: left;" 
+            accept=".json"/>
+
+        <button (click)="Load()" class="btn btn-primary" 
+            style="margin-left: 20px; float: left">Load</button>
+        
+
+        <div style="clear: both;"></div>
+
+    </div>
+
+    <app-board *ngIf="fileIsSelected" [mapFromFile]="selectedFile" ></app-board>
+
+</div>

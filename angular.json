@@ -32,7 +32,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/js/selectItem.js"
+              "src/assets/js/functions.js"
             ]
           },
           "configurations": {
