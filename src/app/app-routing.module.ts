@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { LevelCreatorComponent } from './level-creator/level-creator.component';
 import { ListLevelsComponent } from './list-levels/list-levels.component';
+import { LoadMapComponent } from './load-map/load-map.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SelectLevelComponent } from './select-level/select-level.component';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
         }]
     }]
   },
+  {path: 'load-map', component: LoadMapComponent}
   /*{ path: 'select-level/:size_:lvl', component: BoardComponent }*/
   /*{ path: '', redirectTo: 'main-menu', pathMatch: 'fill' }*/
 ];

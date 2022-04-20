@@ -14,6 +14,9 @@ export class BoardComponent {
 
   @Input() lvl: string = '';
   @Input() map: string = '';
+  @Input() mapFromFile :any;
+
+  private boardFromFile :any = null;
 
   public levelName: string="";
 
@@ -38,37 +41,54 @@ export class BoardComponent {
   constructor(private router: ActivatedRoute, private _router: Router) { }
 
   ngOnInit(): void {
-    this.router.params.forEach(param=>{
-      let size = param['size'];
-      let lvl = param['nr'];
-      
-      import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
-      then(m => {this.newGame(m); }).
-      catch((e)=>{
-        alert(lvl+' of '+size+' map not exists');
-        this._router.navigate(['select-level']);
+    //console.log(this.mapFromFile);
+    if(this.mapFromFile === null || this.mapFromFile === undefined){
+      this.router.params.forEach(param=>{
+        let size = param['size'];
+        let lvl = param['nr'];
+        
+        import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
+        then(m => {this.newGame(m); }).
+        catch((e)=>{
+          alert(lvl+' of '+size+' map not exists');
+          this._router.navigate(['select-level']);
+        });
       });
-    });
+    }
+    else{
+      const fileReader = new FileReader();
+
+      fileReader.readAsText(this.mapFromFile,'UTF-8');
+      fileReader.onload = () => {
+        this.boardFromFile = JSON.parse(JSON.parse(JSON.stringify(fileReader.result?.toString())));
+        this.newGame(this.boardFromFile);
+      }
+    }
+    
   }
 
   reset(): void {
     //import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
-    this.router.params.forEach(param=>{
-      let size = param['size'];
-      let lvl = param['nr'];
-      
-      import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
-      then(m => {this.newGame(m); }).
-      catch((e)=>{
-        alert(lvl+' of '+size+' map not exists');
-        this._router.navigate(['select-level']);
+    if(this.mapFromFile === null || this.mapFromFile === undefined){
+      this.router.params.forEach(param=>{
+        let size = param['size'];
+        let lvl = param['nr'];
+        
+        import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
+        then(m => {this.newGame(m); }).
+        catch((e)=>{
+          alert(lvl+' of '+size+' map not exists');
+          this._router.navigate(['select-level']);
+        });
       });
-    });
+    }
+    else{
+      this.newGame(this.boardFromFile);
+    }
   }
 
   newGame(lvl:any) {
-
-    let level: Board =  JSON.parse(JSON.stringify(lvl));
+    let level: Board = JSON.parse(JSON.stringify(lvl));
 
     this.topCountofTents = level.columnValues;
     this.leftCountofTents = level.rowValues;

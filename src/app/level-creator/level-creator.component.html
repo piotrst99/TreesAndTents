@@ -1,6 +1,6 @@
 <div class="content">
     <div id="createLevelBox">
-        <p id="boardSizeLabel">Board size</p>
+        <p class="Label">Board size</p>
     
         <ng-select class="selectLevel"
             [items]="boardSizes"
@@ -14,12 +14,17 @@
     
         </ng-select>
     
-        <button (click)="saveBoard()" class="btn btn-primary" style="margin-left: 20px;">Save</button>
-        <button (click)="resetBoard()" class="btn btn-warning" style="margin-left: 20px;">Reset</button>
+        <button (click)="saveBoard()" class="btn btn-primary" style="margin-left: 20px; float: left">Save</button>
+        <button (click)="resetBoard()" class="btn btn-warning" style="margin-left: 20px; float: left">Reset</button>
     
+        <br style="clear: both;" />
+
+        <p class="Label">Map name</p>
+        <input [(ngModel)]="mapName" class="form-control form-control-sm" 
+            style="float: left; margin-left: 20px; width: 200px;" type="text">
+
         <div style="clear: both;"></div>
     </div>
-    
     
     <div *ngIf="sizeIsSelected">
         <ng-container *ngFor="let row of board; let i=index">

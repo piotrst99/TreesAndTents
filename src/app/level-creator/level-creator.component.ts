@@ -4,7 +4,9 @@ import {Board} from '../models/board'
 
 //const fs = require('fs');
 
-declare const selectTile: any;
+declare const SaveMap: any;
+
+//declare const selectTile: any;
 
 @Component({
   selector: 'app-level-creator',
@@ -23,6 +25,7 @@ export class LevelCreatorComponent{
   public countTentsRow: number[] = [];
   public countTentsColumn: number[] = [];
   public sizeIsSelected = false;
+  public mapName: string = "";
 
   constructor() { }
 
@@ -54,7 +57,7 @@ export class LevelCreatorComponent{
 
   public saveBoard():void{
     if(!this.CountOfTentsAndTreesAreSame() || this.AdjacentTentsAreExists() ||
-      !this.AllTentsHasTrees()){
+    !this.AllTentsHasTrees()){
       alert('Mistakes found!');
     }
     else{
@@ -69,6 +72,7 @@ export class LevelCreatorComponent{
         this.board[i][j] = 1;
       });
     });
+    this.mapName = "";
   }
 
   private AdjacentTentsAreExists(): boolean{
@@ -143,13 +147,13 @@ export class LevelCreatorComponent{
   }
 
   private SaveToJson(board: number[][]):void{
-    console.log(board);
+    //console.log(board);
 
     let startLevel = Array();
     let correctLevel = Array();
     let columnValues = Array();
     let rowValues = Array();
-    let nameLevel = "";
+    let nameLevel = this.mapName === '' ? "TreesAndTents_Map" : this.mapName;
 
     board.forEach((element, i, index)=>{
       let rowStart = new Array(board.length).fill(0);
@@ -179,13 +183,17 @@ export class LevelCreatorComponent{
       "nameLevel" : nameLevel,
     };
 
-    console.log(boardToSave);
-    JSON.stringify(boardToSave);
+    //console.log(boardToSave);
+    //JSON.stringify(boardToSave);
 
-    var a = document.createElement('a');
+    /*var a = document.createElement('a');
     a.setAttribute('href', 'data:text/plain;charset=utf-u,'+encodeURIComponent(JSON.stringify(boardToSave)));
     a.setAttribute('download', "test.json");
-    a.click();
+    a.click();*/
+
+    let fileName = nameLevel+".json";
+    SaveMap(JSON.stringify(boardToSave), fileName);
+
   }
 
   private GetCountOfTentsRow(board: number[][]): number[]{

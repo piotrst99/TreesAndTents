@@ -12,6 +12,8 @@ import { SelectLevelComponent } from './select-level/select-level.component';
 import { ListLevelsComponent } from './list-levels/list-levels.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RouterModule } from '@angular/router';
+import { LoadMapComponent } from './load-map/load-map.component';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { RouterModule } from '@angular/router';
     MainMenuComponent,
     LevelCreatorComponent,
     SelectLevelComponent,
-    ListLevelsComponent
+    ListLevelsComponent,
+    LoadMapComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
     margin: 20px 0 20px 0;
 }
 
-#selectLvlLabel, #createLvlLabel{
+#selectLvlLabel, #createLvlLabel, #loadMapLabel{
     color: white;
     font-size: 30px;
     font-weight: bold;

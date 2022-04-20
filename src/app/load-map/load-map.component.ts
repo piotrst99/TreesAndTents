@@ -1,0 +1,26 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpXhrBackend, JsonpClientBackend } from '@angular/common/http'
+import { Board } from '../models/board';
+
+@Component({
+  selector: 'app-load-map',
+  templateUrl: './load-map.component.html',
+  styleUrls: ['./load-map.component.css']
+})
+export class LoadMapComponent {
+
+  public selectedFile :any = null;
+  public fileIsSelected: boolean = false;
+  public mapFromFile : any;
+
+  constructor() { }
+
+  Load():void{
+    this.fileIsSelected = true;
+  }
+  
+  OnFileSelected(event:any):void{
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+}
