@@ -40,22 +40,8 @@ export class BoardComponent {
 
   constructor(private router: ActivatedRoute, private _router: Router) { }
 
-  ngOnInit(): void {
-    //console.log(this.mapFromFile);
-    if(this.mapFromFile === null || this.mapFromFile === undefined){
-      this.router.params.forEach(param=>{
-        let size = param['size'];
-        let lvl = param['nr'];
-        
-        import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
-        then(m => {this.newGame(m); }).
-        catch((e)=>{
-          alert(lvl+' of '+size+' map not exists');
-          this._router.navigate(['select-level']);
-        });
-      });
-    }
-    else{
+  ngOnInit(): void {    
+    if(this.mapFromFile !== null || this.mapFromFile !== undefined){
       const fileReader = new FileReader();
 
       fileReader.readAsText(this.mapFromFile,'UTF-8');
@@ -64,12 +50,7 @@ export class BoardComponent {
         this.newGame(this.boardFromFile);
       }
     }
-    
-  }
-
-  reset(): void {
-    //import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
-    if(this.mapFromFile === null || this.mapFromFile === undefined){
+    else{
       this.router.params.forEach(param=>{
         let size = param['size'];
         let lvl = param['nr'];
@@ -82,9 +63,27 @@ export class BoardComponent {
         });
       });
     }
-    else{
+  }
+
+  reset(): void {
+    //import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
+    if(this.mapFromFile !== null || this.mapFromFile !== undefined){
       this.newGame(this.boardFromFile);
     }
+    else{
+      this.router.params.forEach(param=>{
+        let size = param['size'];
+        let lvl = param['nr'];
+        
+        import('../../assets/map_'+size+'/'+lvl+'_'+size+'.json').
+        then(m => {this.newGame(m); }).
+        catch((e)=>{
+          alert(lvl+' of '+size+' map not exists');
+          this._router.navigate(['select-level']);
+        });
+      });
+    }
+    
   }
 
   newGame(lvl:any) {
@@ -195,10 +194,8 @@ export class BoardComponent {
       /*check count of tents*/
       isCorrect === this.countOfTentsInLevel ? this.levelIsEnd = true: false;
       
-      if(this.levelIsEnd){
-        this.putGrass();
-      }
-
+      if(this.levelIsEnd) this.putGrass();
+    
       return;
     }
   }

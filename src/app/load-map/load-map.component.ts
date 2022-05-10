@@ -10,17 +10,20 @@ import { Board } from '../models/board';
 export class LoadMapComponent {
 
   public selectedFile :any = null;
-  public fileIsSelected: boolean = false;
-  public mapFromFile : any;
+  public fileWasLoaded: boolean = false;
+  public fileIsSelect: boolean = false;
+  //public mapFromFile : any;
 
   constructor() { }
 
   Load():void{
-    this.fileIsSelected = true;
+    this.fileWasLoaded = true;
   }
   
   OnFileSelected(event:any):void{
     this.selectedFile = <File>event.target.files[0];
+    this.fileIsSelect = true;
+    this.fileWasLoaded = false;
   }
 
 }

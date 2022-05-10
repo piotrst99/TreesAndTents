@@ -8,13 +8,12 @@
             accept=".json"/>
 
         <button (click)="Load()" class="btn btn-primary" 
-            style="margin-left: 20px; float: left">Load</button>
+            style="margin-left: 20px; float: left" [disabled]="!fileIsSelect" >Load</button>
         
-
         <div style="clear: both;"></div>
 
     </div>
 
-    <app-board *ngIf="fileIsSelected" [mapFromFile]="selectedFile" ></app-board>
+    <app-board *ngIf="fileWasLoaded" [mapFromFile]="selectedFile" ></app-board>
 
 </div>
