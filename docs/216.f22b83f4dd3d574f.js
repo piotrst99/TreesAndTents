@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkTreesAndTents=self.webpackChunkTreesAndTents||[]).push([[216],{216:e=>{e.exports=JSON.parse('{"startLevel":[[1,0,1,1,1],[1,1,1,1,0],[1,1,1,1,1],[1,0,1,1,1],[0,1,1,1,0]],"correctLevel":[[3,0,1,1,1],[1,1,1,1,0],[1,3,1,1,3],[1,0,1,1,1],[0,3,1,3,0]],"columnValues":[1,2,0,1,1],"rowValues":[1,0,2,0,2],"nameLevel":"Level 5 - 5 x 5"}')}}]);
