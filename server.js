@@ -1,19 +1,31 @@
-//Install express server
 const express = require('express');
-const path = require('path');
 
-const app = express();
+let app = express();
 
-// Serve only the static files form the dist directory
-app.use(express.static('./dist/trees-and-tents'));
-//app.use(express.static('../TreesAndTents'));
-//app.use(express.static('../TreesAndTents'));
+app.use(express.static(__dirname+'/dist/trees-and-tents'));
 
-app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/trees-and-tents/'}),
-    //res.sendFile('index.html', {root: '../TreesAndTents/src/'}),
-    //res.sendFile('index.html', '../TreesAndTents/src/'),
-);
+app.get('/*', (req, res) =>{
+    res.sendFile(__dirname+'/dist/trees-and-tents/index.html');
+});
 
-// Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
+
+// //Install express server
+// const express = require('express');
+// const path = require('path');
+
+// const app = express();
+
+// // Serve only the static files form the dist directory
+// app.use(express.static('./dist/trees-and-tents'));
+// //app.use(express.static('../TreesAndTents'));
+// //app.use(express.static('../TreesAndTents'));
+
+// app.get('/*', (req, res) =>
+//     res.sendFile('index.html', {root: 'dist/trees-and-tents/'}),
+//     //res.sendFile('index.html', {root: '../TreesAndTents/src/'}),
+//     //res.sendFile('index.html', '../TreesAndTents/src/'),
+// );
+
+// // Start the app by listening on the default Heroku port
+// app.listen(process.env.PORT || 8080);
