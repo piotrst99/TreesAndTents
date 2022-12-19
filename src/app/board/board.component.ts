@@ -40,10 +40,17 @@ export class BoardComponent {
 
   constructor(private router: ActivatedRoute, private _router: Router) { }
 
-  ngOnInit(): void {    
-    if(this.mapFromFile !== null || this.mapFromFile !== undefined){
+  ngOnInit(): void {
+    //console.log('BoardComponent - ngOnInit');
+    //console.log('lvl', this.lvl);
+    //console.log('map', this.map);
+    //console.log('mapFromFile', this.mapFromFile);
+    //console.log('check', this.mapFromFile !== null || this.mapFromFile !== undefined);
+    // if(this.mapFromFile !== null || this.mapFromFile !== undefined){
+    if(this.mapFromFile || this.mapFromFile !== undefined){
       const fileReader = new FileReader();
 
+      //console.log(this.mapFromFile);
       fileReader.readAsText(this.mapFromFile,'UTF-8');
       fileReader.onload = () => {
         this.boardFromFile = JSON.parse(JSON.parse(JSON.stringify(fileReader.result?.toString())));
@@ -66,8 +73,10 @@ export class BoardComponent {
   }
 
   reset(): void {
+    //console.log('BoardComponent - reset')
     //import('../../assets/map_'+this.map+'/'+this.lvl+'').then(m => { this.newGame(m); });
-    if(this.mapFromFile !== null || this.mapFromFile !== undefined){
+    // if(this.mapFromFile !== null || this.mapFromFile !== undefined){
+    if(this.mapFromFile || this.mapFromFile !== undefined){
       this.newGame(this.boardFromFile);
     }
     else{
@@ -87,6 +96,7 @@ export class BoardComponent {
   }
 
   newGame(lvl:any) {
+    //console.log('BoardComponent - newGame')
     let level: Board = JSON.parse(JSON.stringify(lvl));
 
     this.topCountofTents = level.columnValues;
@@ -107,6 +117,7 @@ export class BoardComponent {
   createBoard(): void { }
 
   clickTile(x:number, y:number):void{
+    //console.log('BoardComponent - clickTile');
     this.levelIsIncorrect = false;
     if(!this.levelIsEnd){
       if(this.startLevel[x][y] !== 0){
@@ -129,6 +140,7 @@ export class BoardComponent {
   }
 
   undoMove(): void{
+    //console.log('BoardComponent - undoMove');
     this.levelIsIncorrect = false;
     if(!this.levelIsEnd && this.playerMoves.length!==0){
       let id = this.playerMoves.length-1;
@@ -139,6 +151,7 @@ export class BoardComponent {
   }
 
   checkPuttedItems():void{
+    //console.log('BoardComponent - checkPuttedItems');
     this.startLevel.forEach((element, i, items)=>{
       this.startLevel[i].forEach((element, j ,items)=>{
         if(element === 2){
@@ -160,6 +173,7 @@ export class BoardComponent {
   }
 
   private AdjacentTentsAreExists(x: number, y:number): boolean{
+    //console.log('BoardComponent - AdjacentTentsAreExists');
     for(let i=x-1; i<=x+1; i++){
       for(let j=y-1; j<=y+1; j++){
         if(i>=0 && i<=this.sideSize-1 && j>=0 && j<=this.sideSize-1 && (i!=x || j!=y))
@@ -171,14 +185,17 @@ export class BoardComponent {
   }
 
   private PuttedTentInCorrectPlace(x: number, y: number): boolean{
+    //console.log('BoardComponent - PuttedTentInCorrectPlace');
     return this.startLevel[x][y] === this.correctLevel[x][y];
   }
 
   private PuttedGrassInCorrectPlace(x: number, y: number):boolean{
+    //console.log('BoardComponent - PuttedGrassInCorrectPlace');
     return this.startLevel[x][y] === this.correctLevel[x][y]+1;
   }
 
   check_LevelIsEnd():void{
+    //console.log('BoardComponent - check_LevelIsEnd');
     if(this.checkCountOfTents() === this.countOfTentsInLevel){
       let isCorrect=0;
 

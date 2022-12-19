@@ -24,9 +24,12 @@ export class SelectLevelComponent{
   public levelIsSelected: boolean = false;
 
   selectBoardSize(event: any): void{
+    //console.log('SelectLevelComponent - selectBoardSize');
+    //console.log(event);
     //console.log(event);
     import('../../assets/LevelList.json').then(m => {
       this.levels = m.default[event];
+      //console.log(this.levels);
       //this.selectedSize = this.selectedSize.replace(/\s/g,"");
     });
     //this.route.params.subscribe(params=>console.log(this.selectedSize.replace(/\s/g,"")));
@@ -34,7 +37,7 @@ export class SelectLevelComponent{
   }
 
   sel(val: any):void{
-    
+    //console.log(val);
   }
 
   /*selectLevel(nr: number):void{
@@ -49,6 +52,7 @@ export class SelectLevelComponent{
   }*/
 
   backToMenu(): void{
+    //console.log('SelectLevelComponent - backToMenu');
     this.levelIsSelected = false;
   }
 

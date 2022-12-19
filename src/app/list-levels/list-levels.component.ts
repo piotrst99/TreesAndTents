@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ListLevelsComponent {
 
   constructor(private route: ActivatedRoute) { 
+    //console.log('ListLevelsComponent - constructor');
     this.route.params.subscribe(params=>console.log(params));
   }
 

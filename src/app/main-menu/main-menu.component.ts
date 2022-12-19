@@ -18,12 +18,14 @@ export class MainMenuComponent {
   //public showLevels():void{}
 
   selectBoardSize(event: any): void{
+    console.log('selectBoardSize');
     import('../../assets/LevelList.json').then(m => {
       this.levels = m.default[this.selectedSize];
     });
   }
 
   selectLevel(nr: number):void{
+    console.log('selectLevel', this.levels[nr]);
     //console.log(this.levels[nr]);
     this.levelName = this.levels[nr];
     this.levelIsSelected= true;
@@ -31,6 +33,7 @@ export class MainMenuComponent {
   }
 
   backToMenu(): void{
+    console.log('MainMenuComponent - backToMenu');
     this.levelIsSelected = false;
   }
 

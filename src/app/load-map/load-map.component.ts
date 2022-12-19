@@ -17,10 +17,12 @@ export class LoadMapComponent {
   constructor() { }
 
   Load():void{
+    console.log('LoadMapComponent - Load');
     this.fileWasLoaded = true;
   }
   
   OnFileSelected(event:any):void{
+    console.log('LoadMapComponent - OnFileSelected');
     this.selectedFile = <File>event.target.files[0];
     this.fileIsSelect = true;
     this.fileWasLoaded = false;
