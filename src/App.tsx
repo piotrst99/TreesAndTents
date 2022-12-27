@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import MainMenu from './components/layouts/MainMenu/MainMenu';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import GameTitle from './components/common/GameTitle';
+import NavButtons from './components/common/NavButtons';
+import Box from '@mui/material/Box';
+import { containerStyle } from './styles/containerStyle';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={containerStyle}>
+      <GameTitle />
+      <NavButtons />
+      <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<MainMenu />}/>
+              <Route path="/select-level" element={<div>select level page</div>}/>
+              <Route path="/create-map" element={<div>create map page</div>}/>
+              <Route path="/load-map" element={<div>load map page</div>}/>
+          </Routes>
+      </BrowserRouter>
+    </Box>
   );
 }
 
