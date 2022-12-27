@@ -3,10 +3,12 @@ import MainMenu from './components/layouts/MainMenu/MainMenu';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import GameTitle from './components/common/GameTitle';
 import NavButtons from './components/common/NavButtons';
+import Box from '@mui/material/Box';
+import { containerStyle } from './styles/containerStyle';
 
 function App() {
   return (
-    <>
+    <Box sx={containerStyle}>
       <GameTitle />
       <NavButtons />
       <BrowserRouter>
@@ -17,7 +19,7 @@ function App() {
               <Route path="/load-map" element={<div>load map page</div>}/>
           </Routes>
       </BrowserRouter>
-    </>
+    </Box>
   );
 }
 
