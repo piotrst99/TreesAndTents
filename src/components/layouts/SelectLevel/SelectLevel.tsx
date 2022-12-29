@@ -1,47 +1,27 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Box from '@mui/material/Box';
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { boardSizes } from "../../../assets/boardSizes";
+import { allMaps } from "../../../assets/maps";
 import { selectLevelInputStyle } from "../../../styles/inputStyles";
+import { levelListStyle, levelTileStyle } from "../../../styles/selectLevelStyles";
+import { Board } from "../../../types/board";
 
 export default function SelectLevel() {
     const [boardSize, setBoardSize] = useState<string>("5x5");
-    const boardSizes = [
-        "5x5", "6x6", "7x7"
-    ];
-
-    // for test
-    const levelsListForTest:{[key: string]: string[]} = {
-        "5x5" : [
-            "Level 1",
-            "Level 2",
-            "Level 3",
-            "Level 4",
-        ],
-        "6x6" : [
-            "Level 1",
-            "Level 2",
-            "Level 3",
-        ],
-        "7x7" : [
-            "Level 1",
-            "Level 2",
-        ]
-    };
-
-    // for test
-    // useEffect(() => {
-    //     //console.log(levelsListForTest[boardSize]);
-    // }, [boardSize]);
 
     const handleSelectValue = (e: any) => {
         setBoardSize(e.target.value);
     };
 
-    // for test
-    const renderLevelListForTest = () => {
+    const renderLevelList = () => {
         const levelList: any[]= [];
-        {levelsListForTest[boardSize].map((x: string)=>(
-            levelList.push(<div key={x}>{x}</div>)
+        {allMaps.find(x=>x.key === boardSize)?.boards?.map((item: Board)=>(
+            levelList.push(
+                <Box sx={levelTileStyle} key={item.key}>
+                    {item.nameLevel}
+                </Box>
+            )
         ))}
         return levelList;
     };
@@ -62,8 +42,7 @@ export default function SelectLevel() {
                     ))}
                 </Select>
             </FormControl>
-            {/* for test */}
-            <Box>{renderLevelListForTest()}</Box>
+            <Box sx={levelListStyle}>{renderLevelList()}</Box>
         </>
     );
 }
