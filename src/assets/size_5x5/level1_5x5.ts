@@ -19,4 +19,4 @@ export const level1_5x5: Board = {
     ],
     columnValues: [2, 0, 1, 1, 1],
     rowValues: [1, 1, 0, 2, 1]
-}
+};
