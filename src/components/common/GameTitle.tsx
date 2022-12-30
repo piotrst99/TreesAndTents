@@ -1,14 +1,6 @@
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-
-const gameTitleStyle = {
-    color: "#DFDFDF",
-    fontSize: "70px",
-    fontWeight: 700,
-    letterSpacing: "5px",
-    textAlign: "center",
-    margin: "15px 0",
-}
+import { gameTitleStyle } from "../../styles/textStyles";
 
 export default function GameTitle(){
     return (
