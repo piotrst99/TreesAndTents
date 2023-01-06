@@ -13,3 +13,9 @@ export interface LevelMaps {
     key: string,
     boards?: Board[]
 };
+
+// TODO
+// Add parameter to interface
+export interface BoardProps {
+    
+};

@@ -1,10 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Box from '@mui/material/Box';
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { boardSizes } from "../../../assets/boardSizes";
 import { allMaps } from "../../../assets/maps";
 import { selectLevelInputStyle } from "../../../styles/inputStyles";
-import { levelListStyle, levelTileStyle } from "../../../styles/selectLevelStyles";
+import { levelListStyle, levelTileStyle, linkToLevelStyle } from "../../../styles/selectLevelStyles";
 import { Board } from "../../../types/board";
 
 export default function SelectLevel() {
@@ -15,14 +16,19 @@ export default function SelectLevel() {
     };
 
     const renderLevelList = () => {
-        const levelList: any[]= [];
-        {allMaps.find(x=>x.key === boardSize)?.boards?.map((item: Board)=>(
+        const levelList: any[] = [];
+        
+        allMaps.find(x=>x.key === boardSize)?.boards?.map((item: Board)=>(
             levelList.push(
                 <Box sx={levelTileStyle} key={item.key}>
-                    {item.nameLevel}
+                    <Link style={linkToLevelStyle} 
+                        to={`/${boardSize}/${item.nameLevel.toLowerCase().replace(' ','')}`}>
+                        {item.nameLevel}
+                    </Link>
                 </Box>
             )
-        ))}
+        ));
+        
         return levelList;
     };
 

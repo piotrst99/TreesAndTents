@@ -41,3 +41,9 @@ export const levelTileStyle = {
         margin: '5px',
     },
 };
+
+export const linkToLevelStyle = {
+    textDecoration: 'none', 
+    color:'#ffe4c4', 
+    display: 'block'
+};
