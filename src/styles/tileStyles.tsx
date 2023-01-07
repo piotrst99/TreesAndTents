@@ -27,3 +27,11 @@ export const grassTileStyle = {
 export const groundTileStyle = {
     backgroundColor: darkGray 
 };
+
+export const numberTile = {
+    width: '50px', 
+    height: '50px', 
+    fontSize:'25px',
+    lineHeight: '50px',
+    textAlign: 'center'
+};

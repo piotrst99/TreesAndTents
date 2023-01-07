@@ -1,35 +1,23 @@
 import Box from "@mui/material/Box";
-import Tile from "./Tile";
+import { Board } from "../../types/board";
+import MapBoard2 from "./createBoardMap";
+import { createColumnNumbers } from "./createColumnNumbers";
+import { createRowNumbers } from "./createRowNumbers";
 
-export default function MapBoard() {
+interface IMapBoard {
+    board: Board;
+};
+
+export default function MapBoard(props: IMapBoard) {
+    const { board } = props;
     return (
-        <>
-            {/* TODO */}
-            {/* load map from file in props */}
-            <Box sx={{display:'flex'}}>
-                <Tile value={1} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-                <Tile value={0} isClickable={true} />
-                <Tile value={1} isClickable={true} />
+        <Box sx={{display: 'flex'}}>
+            {createRowNumbers(board.rowValues)}
+            <Box>
+                {createColumnNumbers(board.columnValues)}
+                {/* for test */}
+                {/* {MapBoard2(board.startLevelState, null)} */}
             </Box>
-            <Box sx={{display:'flex'}}>
-                <Tile value={0} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-            </Box>
-            <Box sx={{display:'flex'}}>
-                <Tile value={0} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-            </Box>
-            <Box sx={{display:'flex'}}>
-                <Tile value={1} isClickable={true} />
-                <Tile value={0} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-                <Tile value={1} isClickable={true} />
-            </Box>
-        </>
+        </Box>
     );
 };

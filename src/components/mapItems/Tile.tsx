@@ -11,10 +11,11 @@ interface ITile {
     isClickable?: boolean;
     x?: number;
     y?: number;
+    changeState?: any;
 }
 
 export default function Tile(props: ITile){
-    const { value, isClickable } = props;
+    const { value, isClickable, changeState, x, y } = props;
     const [tileState, setTileState] = useState<BoardItems>(value);
 
     const onClick = () => {
@@ -22,12 +23,18 @@ export default function Tile(props: ITile){
             return;
         }
 
+        console.log(tileState);
+        
         if(tileState === 3){
             setTileState(1);
         }
         else if(tileState > 0){
             setTileState(tileState + 1);
         }
+
+        // TODO
+        // verify why value is preview ?
+        changeState(x, y, tileState);
     }
 
     const renderItem = () => {
