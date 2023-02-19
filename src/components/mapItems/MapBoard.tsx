@@ -1,23 +1,50 @@
 import Box from "@mui/material/Box";
-import { Board } from "../../types/board";
-import MapBoard2 from "./createBoardMap";
-import { createColumnNumbers } from "./createColumnNumbers";
-import { createRowNumbers } from "./createRowNumbers";
+import Tile from "./Tile";
+import { BoardItems } from "../../types/boardItems";
+import { useCallback } from "react";
 
 interface IMapBoard {
-    board: Board;
+  boardMap: BoardItems[][] | undefined;
+  changeBoardStateValue: (
+    x: number, 
+    y: number, 
+    tileValue: BoardItems
+  ) => void;
 };
 
 export default function MapBoard(props: IMapBoard) {
-    const { board } = props;
-    return (
-        <Box sx={{display: 'flex'}}>
-            {createRowNumbers(board.rowValues)}
-            <Box>
-                {createColumnNumbers(board.columnValues)}
-                {/* for test */}
-                {/* {MapBoard2(board.startLevelState, null)} */}
-            </Box>
-        </Box>
-    );
-};
+  const { boardMap, changeBoardStateValue } = props;
+  // const changeState = (x: number, y: number, tileValue: BoardItems) => {
+  //     if(boardMap) boardMap[x][y] = tileValue;
+  //     setBoardState(boardMap);
+  // };
+
+  const changeState = (x: number, y: number, tileValue: BoardItems) => {
+    // if(boardMap) boardMap[x][y] = tileValue;
+    // changeBoardStateValue(boardMap);
+    changeBoardStateValue(x, y, tileValue);
+  };
+
+  return (
+    <>
+      {boardMap?.map((items: BoardItems[], iIndex: number) => {
+        return (
+          <Box sx={{ display: "flex" }} key={iIndex}>
+            {items.map((item: BoardItems, jIndex: number) => {
+              return (
+                <Tile
+                  key={jIndex}
+                  value={item}
+                  isClickable={item === 0 ? false : true}
+                  x={iIndex}
+                  y={jIndex}
+                  changeState={changeState}
+                />
+              );
+            })}
+          </Box>
+        );
+      })}
+    </>
+  );
+}
