@@ -14,17 +14,17 @@ import { level8_5x5 } from "./level8_5x5";
 import { level9_5x5 } from "./level9_5x5";
 
 export const mapsFor_5x5: Board[] = [
-    level1_5x5,
-    level2_5x5,
-    level3_5x5,
-    level4_5x5,
-    level5_5x5,
-    level6_5x5,
-    level7_5x5,
-    level8_5x5,
-    level9_5x5,
-    level10_5x5,
-    level11_5x5,
-    level12_5x5,
-    level13_5x5
+  level1_5x5,
+  level2_5x5,
+  level3_5x5,
+  level4_5x5,
+  level5_5x5,
+  level6_5x5,
+  level7_5x5,
+  level8_5x5,
+  level9_5x5,
+  level10_5x5,
+  level11_5x5,
+  level12_5x5,
+  level13_5x5
 ];

@@ -5,11 +5,11 @@ import LoadMapButton from "./LoadMapButton";
 import SelectLevelButtom from "./SelectLevelButtom";
 
 export default function NavButtons() {
-    return (
-        <Box sx={buttonsGroupInNav}>
-            <SelectLevelButtom />
-            <CreateMapButton />
-            <LoadMapButton />
-        </Box>
-    );
+  return (
+    <Box sx={buttonsGroupInNav}>
+      <SelectLevelButtom />
+      <CreateMapButton />
+      <LoadMapButton />
+    </Box>
+  );
 }
