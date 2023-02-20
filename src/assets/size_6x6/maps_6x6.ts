@@ -11,14 +11,14 @@ import { level8_6x6 } from "./level8_6x6";
 import { level9_6x6 } from "./level9_6x6";
 
 export const mapsFor_6x6: Board[] = [
-    level1_6x6,
-    level2_6x6,
-    level3_6x6,
-    level4_6x6,
-    level5_6x6,
-    level6_6x6,
-    level7_6x6,
-    level8_6x6,
-    level9_6x6,
-    level10_6x6
+  level1_6x6,
+  level2_6x6,
+  level3_6x6,
+  level4_6x6,
+  level5_6x6,
+  level6_6x6,
+  level7_6x6,
+  level8_6x6,
+  level9_6x6,
+  level10_6x6
 ];

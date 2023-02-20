@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { BoardItems } from "../../types/boardItems";
 import Tree from "./Tree";
 import Ground from "./Ground";
@@ -18,11 +18,12 @@ export default function Tile(props: ITile) {
   const { value, isClickable, changeState, x, y } = props;
   const [tileState, setTileState] = useState<BoardItems>(value);
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     if (!isClickable) {
       return;
     }
 
+    // TODO: console for test - remove in future
     console.log(tileState);
 
     if (tileState === 3) {
@@ -31,12 +32,11 @@ export default function Tile(props: ITile) {
       setTileState(tileState + 1);
     }
 
-    // TODO
-    // verify why value is preview ?
+    // TODO: verify why value is preview ?
     changeState(x, y, tileState);
-  };
+  }, [changeState, isClickable, tileState, x, y]);
 
-  const renderItem = () => {
+  const renderItem = useCallback(() => {
     if (tileState === 0) {
       return <Tree />;
     } else if (tileState === 1) {
@@ -46,7 +46,7 @@ export default function Tile(props: ITile) {
     } else {
       return <Tent />;
     }
-  };
+  } ,[tileState]);
 
   return <Box onClick={onClick}>{renderItem()}</Box>;
 }

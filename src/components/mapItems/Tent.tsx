@@ -5,11 +5,12 @@ import {
   grassTileStyle,
   tileStyle,
   tentIconTileStyle,
+  grassTileHover,
 } from "../../styles/tileStyles";
 
 export default function Tent() {
   return (
-    <Box sx={[tileStyle, grassTileStyle]}>
+    <Box sx={[tileStyle, grassTileStyle, grassTileHover]}>
       <FontAwesomeIcon icon={faCampground} style={tentIconTileStyle} />
     </Box>
   );

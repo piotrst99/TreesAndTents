@@ -1,9 +1,10 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { boardSizes } from "../../../assets/boardSizes";
 import { allMaps } from "../../../assets/maps";
+import mapService from "../../../services/map.service";
 import { selectLevelInputStyle } from "../../../styles/inputStyles";
 import {
   levelListStyle,
@@ -14,24 +15,28 @@ import { Board } from "../../../types/board";
 
 export default function SelectLevel() {
   const [boardSize, setBoardSize] = useState<string>("5x5");
+  const boards: Board[] | undefined = mapService.findMapBySize(boardSize)?.boards;
 
-  const handleSelectValue = (e: any) => {
+  // e type is any, because is from mui select box
+  const handleSelectValue = useCallback((e: any) => {
     setBoardSize(e.target.value);
-  };
+  }, []);
+
+  const prepareLink = useCallback((boardSize: string, levelName: string) => {
+    const lowerLevelName: string = levelName.toLowerCase().replace(" ", "");
+    return `/${boardSize}/${lowerLevelName}`;
+  }, []);
 
   const renderLevelList = () => {
+    // TODO: correct type
     const levelList: any[] = [];
 
-    allMaps
-      .find((x) => x.key === boardSize)
-      ?.boards?.map((item: Board) =>
+    boards?.map((item: Board) =>
         levelList.push(
           <Box sx={levelTileStyle} key={item.key}>
             <Link
               style={linkToLevelStyle}
-              to={`/${boardSize}/${item.nameLevel
-                .toLowerCase()
-                .replace(" ", "")}`}
+              to={prepareLink(boardSize, item.nameLevel)}
             >
               {item.nameLevel}
             </Link>

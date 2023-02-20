@@ -19,11 +19,11 @@ export default function MapBoard(props: IMapBoard) {
   //     setBoardState(boardMap);
   // };
 
-  const changeState = (x: number, y: number, tileValue: BoardItems) => {
+  const changeState = useCallback((x: number, y: number, tileValue: BoardItems) => {
     // if(boardMap) boardMap[x][y] = tileValue;
     // changeBoardStateValue(boardMap);
     changeBoardStateValue(x, y, tileValue);
-  };
+  }, [changeBoardStateValue]);
 
   return (
     <>

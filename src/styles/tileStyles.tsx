@@ -25,9 +25,23 @@ export const grassTileStyle = {
 	backgroundColor: lightGreen
 };
 
+export const grassTileHover = {
+	"&:hover": {
+    cursor: 'pointer',
+    backgroundColor: '#96DB96'
+  },
+}
+
 export const groundTileStyle = {
 	backgroundColor: darkGray 
 };
+
+export const groundTileHover = {
+	"&:hover": {
+		cursor: 'pointer',
+		backgroundColor: '#3D3D3D'
+	},
+}
 
 export const numberTile = {
 	width: '50px', 
