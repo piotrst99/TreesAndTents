@@ -18,23 +18,19 @@ export default function Game() {
   const [boardState, setBoardState] = useState<BoardItems[][] | undefined>(
     mapBoard?.startLevelState
   );
-
-  useEffect(() => {
-    // TODO: For test
-    console.clear();
-    console.log(boardState);
-  }, [boardState, setBoardState]);
+  const [isGameEnd, setIsGameEnd] = useState<boolean>(false);
+  const [isLevelCorrect, setIsLevelCorrect] = useState<boolean>(true);
 
   const changeBoardStateValue = useCallback(
     (x: number, y: number, tileValue: BoardItems) => {
-      // TODO: console for test - remove in future
-      console.log(x, y, tileValue);
       const newBoardState = boardState;
       if (!newBoardState) {
         return;
       }
+
       newBoardState[x][y] = tileValue;
       // TODO: console for test - remove in future
+      console.log(x, y, tileValue);
       console.log(newBoardState);
       setBoardState(newBoardState);
     },

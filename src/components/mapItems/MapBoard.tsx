@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Tile from "./Tile";
 import { BoardItems } from "../../types/boardItems";
-import { useCallback } from "react";
 
 interface IMapBoard {
   boardMap: BoardItems[][] | undefined;
@@ -14,16 +13,6 @@ interface IMapBoard {
 
 export default function MapBoard(props: IMapBoard) {
   const { boardMap, changeBoardStateValue } = props;
-  // const changeState = (x: number, y: number, tileValue: BoardItems) => {
-  //     if(boardMap) boardMap[x][y] = tileValue;
-  //     setBoardState(boardMap);
-  // };
-
-  const changeState = useCallback((x: number, y: number, tileValue: BoardItems) => {
-    // if(boardMap) boardMap[x][y] = tileValue;
-    // changeBoardStateValue(boardMap);
-    changeBoardStateValue(x, y, tileValue);
-  }, [changeBoardStateValue]);
 
   return (
     <>
@@ -38,7 +27,7 @@ export default function MapBoard(props: IMapBoard) {
                   isClickable={item === 0 ? false : true}
                   x={iIndex}
                   y={jIndex}
-                  changeState={changeState}
+                  changeState={changeBoardStateValue}
                 />
               );
             })}

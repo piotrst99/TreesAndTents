@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BoardItems } from "../../types/boardItems";
 import Tree from "./Tree";
 import Ground from "./Ground";
@@ -11,6 +11,7 @@ interface ITile {
   isClickable?: boolean;
   x?: number;
   y?: number;
+  // TODO: correct type
   changeState?: any;
 }
 
@@ -18,23 +19,17 @@ export default function Tile(props: ITile) {
   const { value, isClickable, changeState, x, y } = props;
   const [tileState, setTileState] = useState<BoardItems>(value);
 
-  const onClick = useCallback(() => {
+  const handleClickTile = useCallback(() => {
     if (!isClickable) {
       return;
     }
 
-    // TODO: console for test - remove in future
-    console.log(tileState);
+    const nextValue = tileState === 3 ? 1 : tileState + 1;
+    setTileState(nextValue);
+    changeState(x, y, nextValue);
 
-    if (tileState === 3) {
-      setTileState(1);
-    } else if (tileState > 0) {
-      setTileState(tileState + 1);
-    }
-
-    // TODO: verify why value is preview ?
-    changeState(x, y, tileState);
-  }, [changeState, isClickable, tileState, x, y]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changeState, tileState, isClickable]);
 
   const renderItem = useCallback(() => {
     if (tileState === 0) {
@@ -46,7 +41,7 @@ export default function Tile(props: ITile) {
     } else {
       return <Tent />;
     }
-  } ,[tileState]);
+  }, [tileState]);
 
-  return <Box onClick={onClick}>{renderItem()}</Box>;
+  return <Box onClick={handleClickTile}>{renderItem()}</Box>;
 }
