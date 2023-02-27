@@ -26,7 +26,7 @@ export default function Tile(props: ITile) {
 
     const nextValue = tileState === 3 ? 1 : tileState + 1;
     setTileState(nextValue);
-    changeState(x, y, nextValue);
+    changeState(x, y, tileState, nextValue);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [changeState, tileState, isClickable]);

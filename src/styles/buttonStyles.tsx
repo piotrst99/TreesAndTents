@@ -6,7 +6,7 @@ export const buttonStyle = {
   },
 };
 
-export const buttonsGroupInNav = {
+export const buttonsGroupInCenter = {
   textAlign: "center",
   margin: "15px 0",
   display: "flex",

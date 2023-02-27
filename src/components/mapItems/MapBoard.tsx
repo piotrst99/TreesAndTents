@@ -7,6 +7,7 @@ interface IMapBoard {
   changeBoardStateValue: (
     x: number, 
     y: number, 
+    prevValue: BoardItems,
     tileValue: BoardItems
   ) => void;
 };
