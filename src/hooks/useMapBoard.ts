@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import mapService from "../services/map.service";
 import { Board } from "../types/board";
+import { BoardItems } from "../types/boardItems";
 
 export default function useMapBoard() {
   const getMapBoard = useCallback(
@@ -16,17 +17,23 @@ export default function useMapBoard() {
     []
   );
 
-  const resetLevelMap = useCallback(() => {
-
-  }, []);
+  const resetLevelMap = useCallback(
+    (
+      mapBoard: BoardItems[][],
+      setBoardState: React.Dispatch<React.SetStateAction<BoardItems[][]>>
+    ) => {
+      setBoardState([...mapBoard]);
+    },
+    []
+  );
 
   const fillEmptyTilesInEnd = useCallback(() => {
-
+    // TODO: implement function
   }, []);
 
   return {
     getMapBoard,
     resetLevelMap,
-    fillEmptyTilesInEnd
+    fillEmptyTilesInEnd,
   };
 }

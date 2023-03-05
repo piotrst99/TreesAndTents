@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Board } from "../../../types/board";
 import { BoardItems } from "../../../types/boardItems";
@@ -13,29 +13,26 @@ import useGameLogic from "../../../hooks/useGameLogic";
 export default function Game() {
   const { boardSize, levelName } = useParams();
 
-  const { getMapBoard } = useMapBoard();
+  const { getMapBoard, resetLevelMap } = useMapBoard();
   const { addMove, undoMove } = useGameLogic();
   
   const mapBoard: Board | undefined = getMapBoard(boardSize, levelName);
 
-  const [boardState, setBoardState] = useState<BoardItems[][] | undefined>(
-    mapBoard?.startLevelState
+  const [boardState, setBoardState] = useState<BoardItems[][]>(
+    mapBoard?.startLevelState || [[]]
   );
   const [isGameEnd, setIsGameEnd] = useState<boolean>(false);
   const [isLevelCorrect, setIsLevelCorrect] = useState<boolean>(true);
 
   const changeBoardStateValue = useCallback(
     (x: number, y: number, prevValue: BoardItems, tileValue: BoardItems) => {
-      const newBoardState = boardState;
+      const newBoardState = [...boardState];
       if (!newBoardState) {
         return;
       }
 
-      newBoardState[x][y] = tileValue;
-      // TODO: console for test - remove in future
-      // console.log(x, y, tileValue);
-      // console.log(newBoardState);
-      setBoardState(newBoardState);
+      boardState[x][y] = tileValue;
+      setBoardState(boardState);
       addMove({
         xPox: x,
         yPos: y,
@@ -47,17 +44,21 @@ export default function Game() {
   );
 
   const handleUndoMoveClick = useCallback(() => {
-    undoMove(boardState, setBoardState);
-  }, [boardState, undoMove]);
+    undoMove(setBoardState);
+  }, [undoMove]);
 
-  // TODO: for test
-  useEffect(() => {
-    console.log(boardState);
-  }, [boardState]);
+  const handleResetMap = useCallback(() => {
+    resetLevelMap(
+      mapBoard?.startLevelState || [[]],
+      setBoardState
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetLevelMap]);
 
   return (
     <>
       <GameOptions
+        resetMap={handleResetMap}
         undoMove={handleUndoMoveClick} 
       />
       {mapBoard && (

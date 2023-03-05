@@ -18,6 +18,10 @@ interface ITile {
 export default function Tile(props: ITile) {
   const { value, isClickable, changeState, x, y } = props;
   const [tileState, setTileState] = useState<BoardItems>(value);
+  
+  useEffect(() => {
+    setTileState(value);
+  }, [value]);
 
   const handleClickTile = useCallback(() => {
     if (!isClickable) {

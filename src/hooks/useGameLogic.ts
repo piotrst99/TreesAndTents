@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { BoardItems } from "../types/boardItems";
 
 interface IPlayerMove {
@@ -12,24 +12,22 @@ export default function useGameLogic() {
   const [playerMoves, setPlayerMoves] = useState<IPlayerMove[]>([]);
 
   const undoMove = useCallback(
-    (
-      boardState: BoardItems[][] | undefined,
-      setBoardState: React.Dispatch<React.SetStateAction<BoardItems[][] | undefined>>
-    ) => {
-      // TODO: correct
-      const lastMove: IPlayerMove = playerMoves[playerMoves.length - 1];
-      console.log(lastMove);
-      if(!boardState || !lastMove){
+    (setBoardState: React.Dispatch<React.SetStateAction<BoardItems[][]>>) => {
+      const lastMove = playerMoves.at(-1);
+      if (!lastMove || playerMoves.length === 0) {
+        // TODO: Disable undo move button using redux
         return;
       }
-      const newBoardState = boardState;
-      console.log(newBoardState)
-      setTimeout(() => {
-        newBoardState[lastMove.xPox][lastMove.yPos] = lastMove.prevValue;
-        console.log(newBoardState)
-        setBoardState(newBoardState);
-      }, 2000);
-      // setPlayerMoves(playerMoves.splice(0, playerMoves.length - 1));
+
+      setBoardState((prev) =>
+        prev.map((row, index) => {
+          if (index === lastMove.xPox) {
+            row[lastMove.yPos] = lastMove.prevValue;
+          }
+          return row;
+        })
+      );
+
       setPlayerMoves(playerMoves.splice(0, playerMoves.length - 1));
     },
     [playerMoves]
@@ -41,10 +39,6 @@ export default function useGameLogic() {
     },
     [playerMoves]
   );
-
-  useEffect(() => {
-    console.log(playerMoves);
-  }, [playerMoves]);
 
   return {
     undoMove,

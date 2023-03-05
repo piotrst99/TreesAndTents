@@ -4,14 +4,15 @@ import { buttonsGroupInCenter } from "../../../styles/buttonStyles";
 
 interface IGameOptions {
   undoMove: () => void;
+  resetMap: () => void;
 };
 
 export default function GameOptions(props: IGameOptions) {
-  const { undoMove } = props;
+  const { undoMove, resetMap } = props;
 
   return (
     <Box sx={buttonsGroupInCenter}>
-      <Button variant="contained">Reset</Button>
+      <Button onClick={resetMap} variant="contained">Reset</Button>
       <Button variant="contained">Check</Button>
       <Button onClick={undoMove} variant="contained">Undo</Button>
     </Box>
