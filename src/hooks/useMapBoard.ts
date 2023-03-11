@@ -22,7 +22,7 @@ export default function useMapBoard() {
       mapBoard: BoardItems[][],
       setBoardState: React.Dispatch<React.SetStateAction<BoardItems[][]>>
     ) => {
-      setBoardState([...mapBoard]);
+      setBoardState(mapBoard.map(row => [...row]));
     },
     []
   );

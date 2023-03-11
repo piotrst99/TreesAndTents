@@ -4,12 +4,7 @@ import { BoardItems } from "../../types/boardItems";
 
 interface IMapBoard {
   boardMap: BoardItems[][];
-  changeBoardStateValue: (
-    x: number,
-    y: number,
-    prevValue: BoardItems,
-    tileValue: BoardItems
-  ) => void;
+  changeBoardStateValue: Function;
 }
 
 export default function MapBoard(props: IMapBoard) {

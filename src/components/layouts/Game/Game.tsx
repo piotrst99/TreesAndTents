@@ -10,37 +10,54 @@ import useMapBoard from "../../../hooks/useMapBoard";
 import GameOptions from "./GameOptions";
 import useGameLogic from "../../../hooks/useGameLogic";
 
+interface IChangeBoardStateValue {
+  x: number;
+  y: number;
+  prevValue: BoardItems;
+  tileValue: BoardItems;
+}
+
 export default function Game() {
   const { boardSize, levelName } = useParams();
 
   const { getMapBoard, resetLevelMap } = useMapBoard();
   const { addMove, undoMove } = useGameLogic();
-  
+
   const mapBoard: Board | undefined = getMapBoard(boardSize, levelName);
 
   const [boardState, setBoardState] = useState<BoardItems[][]>(
-    mapBoard?.startLevelState || [[]]
+    !mapBoard?.startLevelState
+      ? [[]]
+      : mapBoard?.startLevelState.map((row) => [...row])
   );
   const [isGameEnd, setIsGameEnd] = useState<boolean>(false);
-  const [isLevelCorrect, setIsLevelCorrect] = useState<boolean>(true);
+  const [isBoardCorrect, setIsBoardCorrect] = useState<boolean>(true);
 
-  const changeBoardStateValue = useCallback(
-    (x: number, y: number, prevValue: BoardItems, tileValue: BoardItems) => {
-      const newBoardState = [...boardState];
+  const modifyBoardState = useCallback(
+    (valueFromTile: IChangeBoardStateValue, prevBoardState: BoardItems[][]) => {
+      const newBoardState = [...prevBoardState];
       if (!newBoardState) {
         return;
       }
 
-      boardState[x][y] = tileValue;
-      setBoardState(boardState);
+      newBoardState[valueFromTile.x][valueFromTile.y] = valueFromTile.tileValue;
+      setBoardState(newBoardState);
+    },
+    []
+  );
+
+  const changeBoardStateValue = useCallback(
+    (arg: IChangeBoardStateValue) => {
+      modifyBoardState(arg, boardState);
+
       addMove({
-        xPox: x,
-        yPos: y,
-        prevValue: prevValue,
-        value: tileValue
+        xPox: arg.x,
+        yPos: arg.y,
+        prevValue: arg.prevValue,
+        value: arg.tileValue,
       });
     },
-    [addMove, boardState]
+    [addMove, boardState, modifyBoardState]
   );
 
   const handleUndoMoveClick = useCallback(() => {
@@ -48,19 +65,13 @@ export default function Game() {
   }, [undoMove]);
 
   const handleResetMap = useCallback(() => {
-    resetLevelMap(
-      mapBoard?.startLevelState || [[]],
-      setBoardState
-    );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    resetLevelMap(mapBoard?.startLevelState || [[]], setBoardState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetLevelMap]);
 
   return (
     <>
-      <GameOptions
-        resetMap={handleResetMap}
-        undoMove={handleUndoMoveClick} 
-      />
+      <GameOptions resetMap={handleResetMap} undoMove={handleUndoMoveClick} />
       {mapBoard && (
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <RowNumbers rowValues={mapBoard.rowValues} />

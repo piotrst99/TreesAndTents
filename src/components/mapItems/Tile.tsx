@@ -11,26 +11,25 @@ interface ITile {
   isClickable?: boolean;
   x?: number;
   y?: number;
-  // TODO: correct type
-  changeState?: any;
+  changeState?: Function | undefined;
 }
 
 export default function Tile(props: ITile) {
   const { value, isClickable, changeState, x, y } = props;
   const [tileState, setTileState] = useState<BoardItems>(value);
-  
+
   useEffect(() => {
     setTileState(value);
   }, [value]);
 
   const handleClickTile = useCallback(() => {
-    if (!isClickable) {
+    if (!isClickable || !changeState) {
       return;
     }
 
     const nextValue = tileState === 3 ? 1 : tileState + 1;
     setTileState(nextValue);
-    changeState(x, y, tileState, nextValue);
+    changeState({ x: x, y: y, prevValue: tileState, tileValue: nextValue });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [changeState, tileState, isClickable]);

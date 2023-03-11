@@ -13,7 +13,7 @@ export default function GameOptions(props: IGameOptions) {
   return (
     <Box sx={buttonsGroupInCenter}>
       <Button onClick={resetMap} variant="contained">Reset</Button>
-      <Button variant="contained">Check</Button>
+      <Button sx={{marginLeft: 2, marginRight: 2}} variant="contained">Check</Button>
       <Button onClick={undoMove} variant="contained">Undo</Button>
     </Box>
   );
