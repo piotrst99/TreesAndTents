@@ -22,14 +22,26 @@ export default function useMapBoard() {
       mapBoard: BoardItems[][],
       setBoardState: React.Dispatch<React.SetStateAction<BoardItems[][]>>
     ) => {
-      setBoardState(mapBoard.map(row => [...row]));
+      setBoardState(mapBoard.map((row) => [...row]));
     },
     []
   );
 
-  const fillEmptyTilesInEnd = useCallback(() => {
-    // TODO: implement function
-  }, []);
+  const fillEmptyTilesInEnd = useCallback(
+    (
+      mapBoard: BoardItems[][],
+      setBoardState: React.Dispatch<React.SetStateAction<BoardItems[][]>>
+    ) => {
+      setBoardState(
+        mapBoard.map((row) =>
+          row.map((item: BoardItems) => {
+            return item === BoardItems.None ? BoardItems.Grass : item;
+          })
+        )
+      );
+    },
+    []
+  );
 
   return {
     getMapBoard,

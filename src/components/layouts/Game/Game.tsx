@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Board } from "../../../types/board";
 import { BoardItems } from "../../../types/boardItems";
@@ -9,6 +9,7 @@ import RowNumbers from "../../mapItems/RowNumbers";
 import useMapBoard from "../../../hooks/useMapBoard";
 import GameOptions from "./GameOptions";
 import useGameLogic from "../../../hooks/useGameLogic";
+import useGameValidate from "../../../hooks/useGameValidate";
 
 interface IChangeBoardStateValue {
   x: number;
@@ -20,8 +21,9 @@ interface IChangeBoardStateValue {
 export default function Game() {
   const { boardSize, levelName } = useParams();
 
-  const { getMapBoard, resetLevelMap } = useMapBoard();
+  const { getMapBoard, resetLevelMap, fillEmptyTilesInEnd } = useMapBoard();
   const { addMove, undoMove } = useGameLogic();
+  const { checkIsLevelEnd } = useGameValidate();
 
   const mapBoard: Board | undefined = getMapBoard(boardSize, levelName);
 
@@ -56,18 +58,26 @@ export default function Game() {
         prevValue: arg.prevValue,
         value: arg.tileValue,
       });
+      setIsGameEnd(checkIsLevelEnd(boardState, mapBoard?.correctLevelState || []));
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [addMove, boardState, modifyBoardState]
   );
 
   const handleUndoMoveClick = useCallback(() => {
-    undoMove(setBoardState);
-  }, [undoMove]);
+    !isGameEnd && undoMove(setBoardState);
+  }, [isGameEnd, undoMove]);
 
   const handleResetMap = useCallback(() => {
     resetLevelMap(mapBoard?.startLevelState || [[]], setBoardState);
+    setIsGameEnd(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetLevelMap]);
+  }, [resetLevelMap, setBoardState]);
+
+  useEffect(()=>{
+    isGameEnd && fillEmptyTilesInEnd(boardState, setBoardState);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fillEmptyTilesInEnd, isGameEnd]);
 
   return (
     <>
@@ -80,11 +90,15 @@ export default function Game() {
             <MapBoard
               boardMap={boardState}
               changeBoardStateValue={changeBoardStateValue}
+              isGameEnd={isGameEnd}
             />
           </Box>
         </Box>
       )}
+      {/* TODO: Correct in future */}
       {!mapBoard && <Box>Map not found!</Box>}
+      {/* TODO: Correct in future */}
+      {isGameEnd && <Box>Level complete!</Box>}
     </>
   );
 }

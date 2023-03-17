@@ -5,10 +5,11 @@ import { BoardItems } from "../../types/boardItems";
 interface IMapBoard {
   boardMap: BoardItems[][];
   changeBoardStateValue: Function;
+  isGameEnd?: boolean;
 }
 
 export default function MapBoard(props: IMapBoard) {
-  const { boardMap, changeBoardStateValue } = props;
+  const { boardMap, changeBoardStateValue, isGameEnd } = props;
 
   return (
     <>
@@ -18,7 +19,7 @@ export default function MapBoard(props: IMapBoard) {
             <Tile
               key={jIndex}
               value={item}
-              isClickable={item === 0 ? false : true}
+              isClickable={item === 0 || isGameEnd ? false : true}
               x={iIndex}
               y={jIndex}
               changeState={changeBoardStateValue}
