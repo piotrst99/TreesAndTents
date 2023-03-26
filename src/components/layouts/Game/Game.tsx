@@ -34,6 +34,7 @@ export default function Game() {
   );
   const [isGameEnd, setIsGameEnd] = useState<boolean>(false);
   const [isBoardCorrect, setIsBoardCorrect] = useState<boolean>(true);
+  const [messageText, setMessageText] = useState<string>("");
 
   const modifyBoardState = useCallback(
     (valueFromTile: IChangeBoardStateValue, prevBoardState: BoardItems[][]) => {
@@ -58,7 +59,9 @@ export default function Game() {
         prevValue: arg.prevValue,
         value: arg.tileValue,
       });
-      setIsGameEnd(checkIsLevelEnd(boardState, mapBoard?.correctLevelState || []));
+      setIsGameEnd(
+        checkIsLevelEnd(boardState, mapBoard?.correctLevelState || [])
+      );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [addMove, boardState, modifyBoardState]
@@ -74,14 +77,19 @@ export default function Game() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetLevelMap, setBoardState]);
 
-  useEffect(()=>{
+  const handleMapCorrectness = useCallback(() => {
+    // TODO: Implement function in future
+    console.log('clicked handleMapCorrectness')
+  }, []);
+
+  useEffect(() => {
     isGameEnd && fillEmptyTilesInEnd(boardState, setBoardState);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fillEmptyTilesInEnd, isGameEnd]);
 
   return (
     <>
-      <GameOptions resetMap={handleResetMap} undoMove={handleUndoMoveClick} />
+      <GameOptions resetMap={handleResetMap} undoMove={handleUndoMoveClick} checkIsCorrect={handleMapCorrectness} />
       {mapBoard && (
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <RowNumbers rowValues={mapBoard.rowValues} />
