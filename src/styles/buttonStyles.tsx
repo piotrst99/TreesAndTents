@@ -1,9 +1,5 @@
 export const buttonStyle = {
-  margin: "5px 15px",
   width: "150px",
-  "@media (min-width: 576px)": {
-    margin: "0 15px",
-  },
 };
 
 export const buttonsGroupInCenter = {
